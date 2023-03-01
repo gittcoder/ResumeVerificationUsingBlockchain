@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import ChainImage from "../Images/chainT.png";
+import { login } from "../Utils/apiConnect";
 
 const styles = theme => ({
   hidden: {
@@ -64,8 +65,48 @@ const styles = theme => ({
 });
 
 class SignIn extends Component {
+
+  state={
+    currentState: "normal",
+    UserName:"",
+    Password:"",
+  }
+
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+
+  submitData = event => {
+    event.preventDefault();
+    if (this.state.currentState === "validate") {
+      return;
+    }
+    this.setState({ currentState: "load" });
+    const {
+      UserName,
+      Password,
+    } = this.state;
+    
+    login(
+      UserName,
+      Password
+    )
+      .then(data => {
+        if (data.data !== undefined)
+          this.setState({
+            currentState: "validate",
+          });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     const { classes } = this.props;
+   
     return (
       <div>
         <Grid container style={{ height: "100%" }}>
@@ -82,11 +123,13 @@ class SignIn extends Component {
               </Typography>
               <form className={classes.form}>
                 <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="email">Email Address</InputLabel>
+                  <InputLabel htmlFor="UserName">UserName</InputLabel>
                   <Input
-                    id="email"
-                    name="email"
-                    autoComplete="email"
+                    id="UserName"
+                    name="UserName"
+                    autoComplete="UserName"
+                    value={this.state.UserName}
+                    onChange={this.handleChange("UserName")}
                     autoFocus
                   />
                 </FormControl>
@@ -97,6 +140,8 @@ class SignIn extends Component {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    value={this.state.Password}
+                    onChange={this.handleChange("Password")}
                   />
                 </FormControl>
                 <FormControlLabel
@@ -109,6 +154,7 @@ class SignIn extends Component {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={this.submitData}
                 >
                   Sign in
                 </Button>

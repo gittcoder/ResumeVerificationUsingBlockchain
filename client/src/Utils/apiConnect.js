@@ -57,3 +57,19 @@ export const generateCertificate = (
     .catch(err => {
       console.log(err);
     });
+
+
+    export const login =(UserName,Password) =>
+    {
+      fetch(`${host}/login`, {
+        ...postHeader,
+        body: JSON.stringify({
+          UserName,
+          Password
+        })
+      })
+        .then(res => console.log(res.json()))
+        .catch(err => {
+          console.log(err);
+        });
+    }

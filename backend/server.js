@@ -7,6 +7,7 @@ const path = require("path");
 
 if (process.env.NODE_ENV === undefined) process.env.NODE_ENV = "development";
 const Certificates = require("./model/Certificates");
+const Login = require("./model/Login");
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -51,6 +52,45 @@ app.get("/certificate/verify/:id", (req, res) => {
       res.status(400).send({ err: "No data found for the given certificateId" })
     );
 });
+
+app.post("/login", (req, res) => {
+  const { user,pass } = req.body
+  console.log(req.body);
+  // console.log(certificateId);
+  Login.find({UserName:user,Password:pass}).then(data=>{
+    if(data.length===0)
+    {
+      res.status(400).json({status:"Invalid Credentials!!!"});
+    }
+    else
+    {
+      res.status(200).json({status:"Lets gooo!!!"});
+    }
+  })
+    .catch(err =>
+      res.status(400).send({ err: "No data found for the given certificateId" })
+    );
+});
+
+
+app.post("/signup", (req, res) => {
+  const { user, pass, fname, lname, email, phone, gender } = req.body;
+  console.log(req.body);
+  // const given = new Date(assignDate);
+
+  // let expirationDate = given.setFullYear(given.getFullYear() + duration);
+
+  // expirationDate = expirationDate.toString();
+
+  const login = new Login({
+    user, pass, fname, lname, email, phone, gender
+  });
+
+  login
+    .save().catch(err => res.status(400).send(err));
+    
+    });
+
 
 app.post("/certificate/generate", (req, res) => {
   const { candidateName, orgName, courseName, assignDate, duration } = req.body;
