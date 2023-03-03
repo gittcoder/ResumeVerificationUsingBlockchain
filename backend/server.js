@@ -76,18 +76,29 @@ app.post("/login", (req, res) => {
 app.post("/signup", (req, res) => {
   const { user, pass, fname, lname, email, phone, gender } = req.body;
   console.log(req.body);
+
+  if(Login.find({ $or: [ {  Phone: phone }, { UserName: user } , {Email:email}] }).length===0)
+  {
+    console.log("NewUser!!!");
+    const login = new Login({
+      user, pass, fname, lname, email, phone, gender
+    });
+  
+    login
+      .save().catch(err => res.status(400).send(err));
+    // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+  }
+  else
+  {
+    res.status(400).send({status:"User Exists!!!"});
+  }
   // const given = new Date(assignDate);
 
   // let expirationDate = given.setFullYear(given.getFullYear() + duration);
 
   // expirationDate = expirationDate.toString();
 
-  const login = new Login({
-    user, pass, fname, lname, email, phone, gender
-  });
-
-  login
-    .save().catch(err => res.status(400).send(err));
+  
     
     });
 
