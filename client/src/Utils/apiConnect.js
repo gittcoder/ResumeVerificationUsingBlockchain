@@ -59,6 +59,35 @@ export const generateCertificate = (
     });
 
 
+    export const SignUp =(username,pass,firstname,
+      lastname,
+      email,
+      phone,
+      gender
+      ) =>
+    {
+      fetch(`${host}/signup`, {
+        ...postHeader,
+        body: JSON.stringify({
+          username,
+          pass,
+          firstname,
+          lastname,
+          email,
+          phone,
+          gender,
+          
+        })
+      })
+        .then(res =>{ console.log(res.json())
+        
+          return ({User:firstname});
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+
     export const login =(UserName,Password) =>
     {
       fetch(`${host}/login`, {

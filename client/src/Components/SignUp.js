@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SubmitAnimation from "./SubmitAnimation";
-import { generateCertificate } from "../Utils/apiConnect";
+import { SignUp } from "../Utils/apiConnect";
 
 const styles = theme => ({
   container: {
@@ -78,17 +78,14 @@ const styles = theme => ({
 
 class GenerateForm extends React.Component {
   state = {
-    firstname: "",
-    lastname: "",
-    pass:"",
-    repass:"",
-    organization: "FossAsia",
-    orgLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/FOSSASIA_Logo.svg/600px-FOSSASIA_Logo.svg.png",
-    coursename: "",
-    assignedOn: null,
-    duration: 0,
-    currentState: "normal",
-    emailId: ""
+    firstname:"",
+      lastname:"",
+      email:"",
+      phone:"",
+      gender:"",
+      pass:"",
+      User:"",
+      currentState:"normal"
   };
 
   handleChange = name => event => {
@@ -106,30 +103,44 @@ class GenerateForm extends React.Component {
     const {
       firstname,
       lastname,
-      organization,
-      coursename,
-      assignedOn,
-      duration,
-      emailId
+      email,
+      phone,
+      gender,
+      pass
     } = this.state;
-    let candidateName = `${firstname} ${lastname}`;
-    let assignDate = new Date(assignedOn).getTime();
-    generateCertificate(
-      candidateName,
-      coursename,
-      organization,
-      assignDate,
-      parseInt(duration),
-      emailId
-    )
-      .then(data => {
-        if (data.data !== undefined)
-          this.setState({
-            currentState: "validate",
-            certificateId: data.data.certificateId
-          });
-      })
-      .catch(err => console.log(err));
+    SignUp(firstname+lastname+phone,pass,firstname,
+      lastname,
+      email,
+      phone,
+      gender,
+      
+    ).then(data => {
+      console.log(data);
+      if (data.data !== undefined)
+        this.setState({
+          currentState: "validate",
+          UserName: data.data.User
+        });
+    })
+    .catch(err => console.log(err));
+    // let candidateName = `${firstname} ${lastname}`;
+    // let assignDate = new Date(assignedOn).getTime();
+    // generateCertificate(
+    //   candidateName,
+    //   coursename,
+    //   organization,
+    //   assignDate,
+    //   parseInt(duration),
+    //   emailId
+    // )
+      // .then(data => {
+      //   if (data.data !== undefined)
+      //     this.setState({
+      //       currentState: "validate",
+      //       User: data.data.User
+      //     });
+      // })
+      // .catch(err => console.log(err));
   };
 
   render() {
@@ -137,20 +148,19 @@ class GenerateForm extends React.Component {
     const {
       firstname,
       lastname,
-      organization,
-      coursename,
-      duration,
-      currentState,
-      orgLogo,
-      emailId,
-      certificateId
+      email,
+      phone,
+      gender,
+      pass,
+      User,
+      currentState
     } = this.state;
     return (
       <Grid container>
         <Grid item xs={12} sm={8}>
           <Paper className={classes.paper}>
             <Typography variant="h3" color="inherit">
-              Certificate Generation Form
+             Sign Up Form
             </Typography>
             <form
               className={classes.container}
@@ -180,62 +190,7 @@ class GenerateForm extends React.Component {
                 />
                 
               </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="organization"
-                  label="Organization"
-                  className={classes.textField}
-                  defaultValue={organization}
-                  margin="normal"
-                  variant="outlined"
-                  InputProps={{
-                    readOnly: true
-                  }}
-                />
-                <TextField
-                  required
-                  id="certified-for"
-                  label="Certified For"
-                  helperText="Any course name or skill for which the certificate is being given."
-                  placeholder="Degree, skill or award.."
-                  className={(classes.courseField, classes.textField)}
-                  defaultValue={coursename}
-                  onChange={this.handleChange("coursename")}
-                  margin="normal"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="assigned-date"
-                  label="Assigned Date"
-                  type="date"
-                  margin="normal"
-                  variant="outlined"
-                  onChange={this.handleChange("assignedOn")}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-                <TextField
-                  required
-                  id="duration"
-                  label="Duration"
-                  helperText="Duration to be provided in years"
-                  value={duration}
-                  onChange={this.handleChange("duration")}
-                  type="number"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  margin="normal"
-                  variant="outlined"
-                />
-              </Grid>
+             
               <Grid item xs={12} sm={12}>
                 <TextField
                   required
@@ -247,28 +202,40 @@ class GenerateForm extends React.Component {
                   autoComplete="email"
                   margin="normal"
                   variant="outlined"
-                  value={emailId}
-                  onChange={this.handleChange("emailId")}
+                  value={email}
+                  onChange={this.handleChange("email")}
                 />
                 <TextField
                   required
-                  id="firstname"
+                  id="Phone"
+                  label="Phone"
+                  className={classes.textField}
+                  value={phone}
+                  onChange={this.handleChange("phone")}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <TextField
+                  required
+                  id="gender"
+                  label="gender"
+                  className={classes.textField}
+                  value={gender}
+                  onChange={this.handleChange("gender")}
+                  margin="normal"
+                  variant="outlined"
+                />
+                
+                <TextField
+                  required
+                  id="pwd"
                   label="Password"
                   className={classes.textField}
-                  value={firstname}
+                  value={pass}
                   onChange={this.handleChange("pass")}
                   margin="normal"
                   variant="outlined"
-                /><TextField
-                required
-                id="firstname"
-                label="Re-enter Password"
-                className={classes.textField}
-                value={firstname}
-                onChange={this.handleChange("repass")}
-                margin="normal"
-                variant="outlined"
-              />
+                />
               </Grid>
               <Grid item xs={12} sm={12}>
                 <SubmitAnimation
@@ -281,23 +248,11 @@ class GenerateForm extends React.Component {
                     color="inherit"
                     className={classes.submitBtn}
                   >
-                    Certificate genrated with id {certificateId}
+                    Certificate genrated with id {User}
                   </Typography>
                 )}
               </Grid>
             </form>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Paper className={classes.rightpaper}>
-            <div style={{ maxWidth: "90%" }}>
-              <img src={orgLogo} alt="org-logo" style={{ maxWidth: "100%" }} />
-            </div>
-            <div>
-              <Typography variant="h5" color="inherit" noWrap>
-                {organization}
-              </Typography>
-            </div>
           </Paper>
         </Grid>
       </Grid>
