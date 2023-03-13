@@ -54,17 +54,17 @@ app.get("/certificate/verify/:id", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  const { user,pass } = req.body
+  const { email,pass } = req.body
   console.log(req.body);
   // console.log(certificateId);
-  Login.find({UserName:user,Password:pass}).then(data=>{
+  Login.find({Email:email,Password:pass}).then(data=>{
     if(data.length===0)
     {
-      res.status(400).json({status:"Invalid Credentials!!!"});
+      res.status(400).send({status:"Invalid Credentials!!!"});
     }
     else
     {
-      res.status(200).json({status:"Lets gooo!!!"});
+      res.status(200).send({status:"Lets gooo!!!"});
     }
   })
     .catch(err =>

@@ -1,3 +1,9 @@
+import { withRouter } from 'react-router-dom'
+import React from "react";
+
+
+
+
 const getHeader = {
   headers: {
     Accept: "application/json"
@@ -88,17 +94,27 @@ export const generateCertificate = (
         });
     }
 
-    export const login =(UserName,Password) =>
+    const login =(UserName,Password) =>
     {
       fetch(`${host}/login`, {
         ...postHeader,
         body: JSON.stringify({
-          UserName,
-          Password
+          email:UserName,
+          pass:Password
         })
       })
-        .then(res => console.log(res.json()))
+        .then(res =>{ console.log(res.json());this.props.history.push('/generate-certificate');})
         .catch(err => {
           console.log(err);
         });
     }
+
+    
+login.propTypes = {
+  history: React.PropTypes.shape({
+    push: React.PropTypes.func.isRequired,
+  }),
+};
+
+
+export default withRouter(login);
