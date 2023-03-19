@@ -110,11 +110,11 @@ export const generateCertificate = (
     }
 
     
-login.propTypes = {
-  history: React.PropTypes.shape({
-    push: React.PropTypes.func.isRequired,
-  }),
-};
+// login.propTypes = {
+//   history: React.PropTypes.shape({
+//     push: React.PropTypes.func.isRequired,
+//   }),
+// };
 
 
 export default withRouter(login);
