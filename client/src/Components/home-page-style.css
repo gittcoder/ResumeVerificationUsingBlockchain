@@ -1,0 +1,202 @@
+/* Body */
+.homebody {
+    margin: 0px;
+    background-color: #C9EEFF;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Navigation Bar */
+
+.nav {
+    background-color: #146C94;
+    overflow: hidden;
+    padding: 10px 0px;
+}
+
+
+.nav-r .links {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 10px 8px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0px 10px;
+
+}
+
+.logo-navbar {
+    margin-left: 20px;
+
+}
+
+
+
+.links:hover {
+    background-color: #ddd;
+    color: black;
+    border-radius: 8px;
+
+}
+
+.nav a.active {
+    background-color: #146C94;
+    color: white;
+    border-radius: 8px;
+
+}
+
+.nav-r {
+    float: right;
+}
+
+.btn1 {
+
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #0f4f6f;
+    border: none;
+    color: #b0bfc6;
+    text-decoration: none;
+    text-align: center;
+    margin: 0px 5px;
+    display: inline-block;
+    border-radius: 8px;
+    padding: 10px 30px;
+
+
+}
+
+.btn1-class:visited {
+    color: white;
+}
+
+.btn2-class:visited {
+    color: #333;
+}
+
+.btn2 {
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #ddd;
+    border: none;
+    text-align: center;
+    color: #136B93;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 8px;
+    margin: 0px 5px;
+
+    padding: 10px 30px;
+
+}
+
+
+/* Home */
+
+.home {
+    background-color: #C9EEFF;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    text-align: left;
+    padding-left: 100px;
+    padding-bottom: 0px;
+    align-items: center;
+
+}
+
+h1 {
+    font-size: 90px;
+    font-style: italic;
+}
+
+p {
+    font-size: 30px;
+    width: 80%;
+    font-style: inherit;
+    text-align: center;
+    float: left;
+}
+
+.home1 {
+    float: left;
+}
+.homepage-logo-title{
+display:flex;
+text-align: center;
+
+}
+
+.home-title{
+    margin:auto;
+}
+
+img.ss {
+    width: 600px;
+    height: 600px;
+    margin-right: 100px;
+    object-fit: contain;
+
+}
+
+.home2 {
+
+    float: right;
+}
+
+img.sh {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10%;
+
+}
+
+img.sh1 {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 10%;
+
+}
+
+footer {
+
+    float: left;
+    color: #333;
+    text-align: center;
+    padding: 20px 26px;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    word-spacing: 60px;
+
+}
+
+a:link {
+    text-decoration: none;
+    color: #333
+}
+
+.ft {
+    float: left;
+}
+
+.bottom-hr {
+    width: 100%;
+    height: 2px;
+    border-width: 0;
+    color: gray;
+    margin:0px;
+    background-color: gray;
+}
+
+footer {
+    width: 100%;
+}
+
+.footer-link {
+    margin: 2px 20px;
+}

@@ -1,0 +1,20 @@
+.navbar-logo{
+    height:40px;
+    margin:3px 8px;
+    border-radius:3px;
+
+}
+
+.logo-securify-navbar{
+    display:flex;
+    justify-content:space-between;
+}
+
+
+.navbar-securify{
+    margin-top:10px;
+}
+
+.MuiIconButton-root-51{
+font-size:1.1rem !important;
+}

@@ -7,6 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SubmitAnimation from "./SubmitAnimation";
 import { generateCertificate } from "../Utils/apiConnect";
+import { Cookies } from 'react-cookie';
+import { instanceOf } from 'prop-types';
+
 
 const styles = theme => ({
   container: {
@@ -86,8 +89,14 @@ class GenerateForm extends React.Component {
     assignedOn: null,
     duration: 0,
     currentState: "normal",
-    emailId: ""
+    emailId: "",
+    cookies: instanceOf(Cookies).isRequired
   };
+
+  // componentDidMount()
+  // {
+  //   this.state.cookies.get('user')
+  // }
 
   handleChange = name => event => {
     this.setState({

@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { fade } from "@material-ui/core/styles/colorManipulator";
@@ -13,10 +12,13 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Link from "react-router-dom/Link";
+import history from "../Utils/history";
+import { Button } from "@material-ui/core";
+import imgLogo from "../Images/logo-securify.png";
+import navbarcss from "./navbarcss.css";
+
 
 const styles = theme => ({
   root: {
@@ -91,8 +93,22 @@ const styles = theme => ({
 class NavBar extends React.Component {
   state = {
     anchorEl: null,
-    mobileMoreAnchorEl: null
+    mobileMoreAnchorEl: null,
+    status:"Log In",
+    display:"none",
   };
+
+  componentDidMount()
+  {
+    if(localStorage.getItem("user")==null)
+    {
+      this.setState({status:"Log In",display:"none"});
+    }
+    else
+    {
+      this.setState({status:"Log Out",display:"block"});
+    }
+  }
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -117,58 +133,9 @@ class NavBar extends React.Component {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem component={Link} to="/generate-certificate">
-          Generate Certificate
-        </MenuItem>
-        <MenuItem component={Link} to="/display/certificate">
-          Dashboard
-        </MenuItem>
-        <MenuItem component={Link} to="/login">
-          Login
-        </MenuItem>
-      </Menu>
-    );
 
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMobileMenuOpen}
-        onClose={this.handleMobileMenuClose}
-      >
-        <MenuItem>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <p>Messages</p>
-        </MenuItem>
-        <MenuItem>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
-          <IconButton color="inherit">
-            <AccountCircle />
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem>
-      </Menu>
-    );
+
+    
 
     return (
       <div className={classes.root}>
@@ -181,7 +148,7 @@ class NavBar extends React.Component {
               component={Link}
               to="/"
             >
-              <HomeIcon />
+              <HomeIcon color="inherit" />
             </IconButton>
             <Typography
               className={classes.title}
@@ -189,39 +156,54 @@ class NavBar extends React.Component {
               color="inherit"
               noWrap
             >
-              CertifyBlock
-            </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+
+
+<div class="logo-securify-navbar">
+              <img src={imgLogo} class="navbar-logo"></img>
+              <span class="navbar-securify">Securify
+              </span>
+
               </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div>
+            </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
+          <div class="navbar-options" style={{display:"flex"}}>
+              <IconButton color="inherit"
+              onClick={()=>{if(localStorage.getItem("user")===null)
+                              {history.push("/login")}
+                              else{history.push("/dashboard")}}}
+                style={{display:this.state.display}}>
+         
+                  Dashboard
+       
               </IconButton>
-              <IconButton color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
+
+              <IconButton color="inherit"
+              onClick={()=>{history.push("/AboutUs")}}>
+               
+                  About Us
+              
               </IconButton>
+              <Button variant="outlined" color="inherit" style={{color:"white",borderColor:"white"}}
+              onClick={()=>{if(localStorage.getItem("user")===null)
+              {
+                history.push("/login")}
+              else{localStorage.removeItem("user");
+              localStorage.removeItem("pwd");
+                history.push("/")}}}>
+                {this.state.status}
+              </Button>
+              
+              </div>
+
+
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
                 onClick={this.handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
+                
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
@@ -235,8 +217,8 @@ class NavBar extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
-        {renderMenu}
-        {renderMobileMenu}
+       
+        
       </div>
     );
   }

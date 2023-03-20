@@ -33,6 +33,11 @@ const CertificateSchema = new mongoose.Schema({
     type: Number,
     required: true,
     trim: true
+  },
+  emailId: {
+    type: String,
+    required: true,
+    trim: true
   }
 });
 

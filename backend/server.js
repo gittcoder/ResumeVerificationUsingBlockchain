@@ -29,6 +29,7 @@ if (process.env.NODE_ENV !== "production") app.use(require("cors")());
 
 app.get("/certificate/data/:id", (req, res) => {
   let certificateId = req.params.id;
+  console.log(certificateId)
   Certificates.findById(certificateId)
     .then(obj => {
       if (obj === null)
@@ -106,7 +107,7 @@ app.post("/signup", (req, res) => {
 
 
 app.post("/certificate/generate", (req, res) => {
-  const { candidateName, orgName, courseName, assignDate, duration } = req.body;
+  const { candidateName, orgName, courseName, assignDate, duration,emailId } = req.body;
   console.log(req.body);
   const given = new Date(assignDate);
 
@@ -120,7 +121,8 @@ app.post("/certificate/generate", (req, res) => {
     courseName,
     expirationDate,
     assignDate,
-    duration
+    duration,
+    emailId
   });
 
   certificate
@@ -164,5 +166,42 @@ app.listen(port, () => {
     } environment.\nServer is up on port ${port}`
   );
 });
+
+
+app.post("/certificateList", (req, res) => {
+  const { email, pass } = req.body;
+  console.log(req.body);
+  Login.find({emailId:email,Password:pass}).then(data=>{
+  if(data.length!==0)
+  {
+    console.log("Success!!!");
+    Certificates.find({emailId:email}).then(entries=>{
+   
+     res.json(entries);
+      
+    })
+    // const login = new Login({
+    //   UserName:username, Password:pass, FirstName:firstname, LastName:lastname, Email:email, Phone:phone, Gender:gender,emailId
+    // });
+  
+    // login
+    //   .save().then(res.status(200).send({result:"Success"})).catch(err => {console.log(err);
+    //     res.status(400).send(err)});
+    // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+  }
+  else
+  {
+    res.status(400).send({status:"User Exists!!!"});
+  }
+})
+  // const given = new Date(assignDate);
+
+  // let expirationDate = given.setFullYear(given.getFullYear() + duration);
+
+  // expirationDate = expirationDate.toString();
+
+  
+    
+    });
 
 module.exports = { app };

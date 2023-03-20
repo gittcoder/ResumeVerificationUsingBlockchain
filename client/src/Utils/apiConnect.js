@@ -1,5 +1,8 @@
 import { withRouter } from 'react-router-dom'
 import React from "react";
+import history from './history'
+import { useCookies } from 'react-cookie'
+
 
 
 
@@ -94,7 +97,7 @@ export const generateCertificate = (
         });
     }
 
-    const login =(UserName,Password) =>
+   export const login =(UserName,Password) =>
     {
       fetch(`${host}/login`, {
         ...postHeader,
@@ -103,7 +106,13 @@ export const generateCertificate = (
           pass:Password
         })
       })
-        .then(res =>{ console.log(res.json());this.props.history.push('/generate-certificate');})
+        .then(res =>{ if(res.status===200)
+          {
+            localStorage.setItem('user',UserName)
+            localStorage.setItem('pwd',Password)
+            // setCookie('user',UserName, { path: '/' });
+            history.push('/dashboard');
+        }})
         .catch(err => {
           console.log(err);
         });
@@ -117,4 +126,3 @@ export const generateCertificate = (
 // };
 
 
-export default withRouter(login);
