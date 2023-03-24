@@ -37,7 +37,9 @@ const LoginSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
-  }
+  },
+  
+  
 });
 
 LoginSchema.methods.toJSON = function() {

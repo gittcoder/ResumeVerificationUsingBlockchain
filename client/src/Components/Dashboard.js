@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import history from "../Utils/history";
 import { Typography,Card } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
 
 
 

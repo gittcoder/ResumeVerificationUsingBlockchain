@@ -14,7 +14,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import ChainImage from "../Images/logo-securify.png";
 import ChainImage2 from "../Images/logo-securify.png";
-
+import history from "../Utils/history"
 import signincss from "./signin.css"
 
 
@@ -70,6 +70,16 @@ const styles = theme => ({
 });
 
 class SignIn extends Component {
+  componentDidMount()
+  {
+    if(localStorage.getItem("user")!==null)
+    {
+      if(localStorage.getItem("privilege"==="normal"))
+      history.push("/dashboard");
+      else
+      history.push("/OrgHome")
+    }
+  }
 
   state={
     currentState: "normal",
@@ -100,12 +110,7 @@ class SignIn extends Component {
       UserName,
       Password
     )
-      .then(data => {
-        if (data.data !== undefined)
-          this.setState({
-            currentState: "validate",
-          });
-      })
+      
       .catch(err => console.log(err));
   };
 
@@ -117,11 +122,11 @@ class SignIn extends Component {
         <Grid container style={{ height: "100%" }}>
 
         <Grid className={classes.hidden}  item sm={false} md={8}>
-          <div class="signIn-left">
+          <div className="signIn-left">
             <img className="image-signin-logo" src={ChainImage} alt="chain" />
-            <h1 class="signIn-text">Securify</h1>
-      <p class="signIn-desc">Our mission at Securify is to provide a cutting-edge document verification service that leverages the power of blockchain technology to ensure the highest level of security and transparency. We aim to provide a reliable and efficient platform for individuals and businesses to verify the authenticity of their important documents, such as IDs, passports, and certificates, without the need for physical verification.</p>
-<p class="signIn-desc">
+            <h1 className="signIn-text">Securify</h1>
+      <p className="signIn-desc">Our mission at Securify is to provide a cutting-edge document verification service that leverages the power of blockchain technology to ensure the highest level of security and transparency. We aim to provide a reliable and efficient platform for individuals and businesses to verify the authenticity of their important documents, such as IDs, passports, and certificates, without the need for physical verification.</p>
+<p className="signIn-desc">
 Our goal is to utilize the immutability and decentralization of the blockchain to create a tamper-proof and verifiable digital record of each document verification. We believe that this approach can revolutionize the document verification process, providing a secure and trustworthy solution to prevent fraud, identity theft, and other malicious activities.</p>
             </div>
           </Grid>
@@ -171,6 +176,19 @@ Our goal is to utilize the immutability and decentralization of the blockchain t
                   onClick={this.submitData}
                 >
                   Sign in
+                </Button>
+                <Typography component="h5"  style={{marginTop:"20px"}}>
+                Don't have an account ?
+              </Typography>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={()=>{history.push("/SignUpOptions")}}
+                >
+                  Sign Up
                 </Button>
               </form>
             </Paper>

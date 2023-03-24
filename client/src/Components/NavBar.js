@@ -158,20 +158,22 @@ class NavBar extends React.Component {
             >
 
 
-<div class="logo-securify-navbar">
-              <img src={imgLogo} class="navbar-logo"></img>
-              <span class="navbar-securify">Securify
+<div className="logo-securify-navbar">
+              <img src={imgLogo} className="navbar-logo"></img>
+              <span className="navbar-securify">Securify
               </span>
 
               </div>
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-          <div class="navbar-options" style={{display:"flex"}}>
+            
+          <div className="navbar-options" style={{display:"flex"}}>
               <IconButton color="inherit"
               onClick={()=>{if(localStorage.getItem("user")===null)
                               {history.push("/login")}
-                              else{history.push("/dashboard")}}}
+                              else{if(localStorage.getItem("privilege")==="normal")history.push("/dashboard")
+                            else{history.push("/OrgHome")}}}}
                 style={{display:this.state.display}}>
          
                   Dashboard

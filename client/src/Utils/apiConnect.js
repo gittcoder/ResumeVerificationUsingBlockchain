@@ -88,10 +88,59 @@ export const generateCertificate = (
           
         })
       })
-        .then(res =>{ console.log(res.json())
-        
-          return ({User:firstname});
+      .then(async res =>{ if(res.status===200)
+        {
+          await res.json().then(
+            (body)=>{
+              console.log(body.result);
+              if(body.result=="Success")
+              {
+                localStorage.setItem('user',email)
+                localStorage.setItem('pwd',pass)
+                localStorage.setItem("privilege",body.privilege)
+                history.push("/dashboard");
+              }
+            }
+          )
+        }})
+        .catch(err => {
+          console.log(err);
+        });
+    }
+
+    export const OrgReg =(orgname,
+      orgregno,
+      email,
+      phone,
+      pass
+      ) =>
+    {
+      fetch(`${host}/OrgReg`, {
+        ...postHeader,
+        body: JSON.stringify({
+          orgname,
+      orgregno,
+      email,
+      phone,
+      pass,
+          
         })
+      })
+       .then(async res =>{ if(res.status===200)
+        {
+          await res.json().then(
+            (body)=>{
+              console.log(body.result);
+              if(body.result=="Success")
+              {
+                localStorage.setItem('user',email)
+                localStorage.setItem('pwd',pass)
+                localStorage.setItem("privilege",body.privilege)
+                history.push("/OrgHome");
+              }
+            }
+          )
+        }})
         .catch(err => {
           console.log(err);
         });
@@ -106,12 +155,21 @@ export const generateCertificate = (
           pass:Password
         })
       })
-        .then(res =>{ if(res.status===200)
-          {
-            localStorage.setItem('user',UserName)
-            localStorage.setItem('pwd',Password)
-            // setCookie('user',UserName, { path: '/' });
-            history.push('/dashboard');
+      .then(async res =>{ if(res.status===200)
+        {
+          await res.json().then(
+            (body)=>{
+              console.log(body.result);
+              if(body.result=="Success")
+              {
+                localStorage.setItem('user',UserName)
+                localStorage.setItem('pwd',Password)
+                localStorage.setItem("privilege",body.privilege)
+                if(body.privilege==="normal")history.push("/dashboard");
+                else{history.push("/OrgHome")}
+              }
+            }
+          )
         }})
         .catch(err => {
           console.log(err);
@@ -126,3 +184,25 @@ export const generateCertificate = (
 // };
 
 
+export const RequestCertificates =(UserName,Password,OrgName,ReqTo,Message
+  ) =>
+{
+  fetch(`${host}/signup`, {
+    ...postHeader,
+    body: JSON.stringify({
+      UserName,
+      Password,
+      OrgName,
+      ReqTo,
+      Message
+      
+    })
+  })
+    .then(res =>{ console.log(res.json())
+    
+      return ({User:UserName});
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
