@@ -135,6 +135,7 @@ export const generateCertificate = (
               {
                 localStorage.setItem('user',email)
                 localStorage.setItem('pwd',pass)
+                localStorage.setItem('orgname',orgname)
                 localStorage.setItem("privilege",body.privilege)
                 history.push("/OrgHome");
               }
@@ -165,8 +166,10 @@ export const generateCertificate = (
                 localStorage.setItem('user',UserName)
                 localStorage.setItem('pwd',Password)
                 localStorage.setItem("privilege",body.privilege)
+                
+              
                 if(body.privilege==="normal")history.push("/dashboard");
-                else{history.push("/OrgHome")}
+                else{localStorage.setItem("orgname",body.orgname);history.push("/OrgHome")}
               }
             }
           )
@@ -184,24 +187,33 @@ export const generateCertificate = (
 // };
 
 
-export const RequestCertificates =(UserName,Password,OrgName,ReqTo,Message
+export const RequestCertificates =(UserName,Password,ReqTo,Message,OrgName
   ) =>
 {
-  fetch(`${host}/signup`, {
+
+  fetch(`${host}/RequestCertificate`, {
     ...postHeader,
     body: JSON.stringify({
-      UserName,
+      Email:UserName,
       Password,
-      OrgName,
       ReqTo,
-      Message
+      Message,
+      OrgName
       
     })
   })
-    .then(res =>{ console.log(res.json())
-    
-      return ({User:UserName});
-    })
+  .then(async res =>{ if(res.status===200)
+    {
+      await res.json().then(
+        (body)=>{
+          console.log(body.result);
+          if(body.result=="Success")
+          {
+            history.push("/OrgHome")
+          }
+        }
+      )
+    }})
     .catch(err => {
       console.log(err);
     });

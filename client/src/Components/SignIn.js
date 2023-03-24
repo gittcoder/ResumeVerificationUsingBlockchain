@@ -111,7 +111,7 @@ class SignIn extends Component {
       Password
     )
       
-      .catch(err => console.log(err));
+     
   };
 
   render() {

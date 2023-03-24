@@ -4,15 +4,20 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import history from "../Utils/history";
-import { Typography,Card } from "@material-ui/core";
+import { Typography,Card,CardContent,Fade } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
 
 
 class Dashboard extends Component{
+
+
   state=
   {
-    certificates:[]
+    certificates:[],
+    requests:[],
+    nav:false,
+    reqid:0,
   }
 componentDidMount()
 {
@@ -20,7 +25,7 @@ componentDidMount()
   {
     history.push("/login");
   }
-  
+
 const getHeader = {
   headers: {
     Accept: "application/json"
@@ -45,13 +50,27 @@ const getHeader = {
         {
           await res.json().then(
             (body)=>{
-              var c=[]
-              body.forEach((entries)=>
+              let c=[]
+              let cert = JSON.parse(body["0"])
+              // console.log(body["1"]);
+              cert.forEach((entries)=>
               {
                 c.push(entries["obj"]);
+              
               })
               this.setState({certificates:c})
-            }
+              console.log(JSON.parse(body["1"]))
+              let req = JSON.parse(body["1"])
+              c=[]
+              req.forEach((entries)=>
+              {
+                  c.push(entries);
+              
+              })
+              this.setState({requests:c})
+              
+              console.log(this.state.requests[this.state.reqid].OrgName);
+             }
           )
           
           // localStorage.setItem('user',UserName)
@@ -141,7 +160,7 @@ const getHeader = {
                 height:"auto"
 
               }}>
-              {this.state.certificates.map((item, index) => (
+              {this.state.requests.map((item, index) => (
                 <Grid
                 className="entry"
         container
@@ -152,17 +171,15 @@ const getHeader = {
         >
           <Card className={"c"+index} key={index} 
           sx={{boxShadow: "10px 10px 20px rgb(30,30,30)"}}
-          style={{width:"15vw",height:"20vh",borderRadius:"20px",position:"relative",left:"2%",marginTop:"20px",marginBottom:"20px"}}>
-            <Typography style={{fontSize:"30px"}} >{item.courseName}</Typography>
-            <Typography style={{fontSize:"15px"}}>Organization : {item.orgName}</Typography>
-            <Typography style={{fontSize:"15px"}}>Date : {new Date(item.assignDate).toString().slice(4, 15)}</Typography>
+          style={{width:"15vw",height:"20vh",borderRadius:"20px",position:"relative",left:"2%",marginTop:"20px",marginBottom:"20px"}}> 
+            <Typography style={{fontSize:"15px"}}>Organization : {item.OrgName}</Typography>
 
             
         
             <Button
             style={{position:"relative",top:"10%",left:"35%",marginBottom:"30px"}}
             className={"b"+index}
-            onClick={()=>{history.push("/display/certificate/"+item._id)}}
+            onClick={()=>{this.setState({nav:true,reqid:index})}}
             variant="outlined"
             color="primary"
             >
@@ -170,6 +187,60 @@ const getHeader = {
           </Card>
           </Grid>
         ))}
+        </div>
+        <div style={{position:"absolute",top:"15%",left:"15%"}}>
+        <Fade in={this.state.nav}>
+                    <Grid
+                        className="entry"
+                        container
+                        sx={{
+                        width: "600vw",
+                        height: "600vh",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "black",
+                        }}
+
+                    >
+                        <Card
+                        sx={{
+                            width: {
+                            xs: "70%",
+                            sm: "70%",
+                            md: "80%",
+                            lg: "60%",
+                            },
+                            height: "60%",
+                            borderRadius: "1.5rem",
+                            boxShadow: "0 10px 20px rgb(30,30,30)",
+                            padding:"20px",
+                            position:"absolute",
+                            
+                        }}
+                        >
+                        <CardContent className="available-class-pop">
+                        <Typography sx={{ fontSize: 40 }} color="text.secondary" gutterBottom >
+                        Available Classes
+                        </Typography>
+                        <div style={{ flex: "1",overflowY:"scroll",height:"20%"}}>
+                        {/* {EmptyClasses()} */}
+                        {/* <Typography style={{fontSize:"15px"}}>Organization : {this.state.certificates[this.state.reqid].OrgName}</Typography> */}
+                        </div>
+                            <Button variant="contained" 
+                            onClick={()=>{this.setState({nav:false})}}
+                               sx={{
+                                width: "30%",
+                                height: "6vh",
+                                position:"absolute",
+                                margin:"20px",
+                                top:"45vh",
+                                left:"20vw",
+                            }}>Back</Button>
+                        </CardContent>
+                        </Card>
+                    </Grid>
+                    </Fade>
+                    
         </div>
         </div>
         

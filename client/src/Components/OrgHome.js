@@ -33,7 +33,7 @@ class OrgHome extends Component
                   variant="contained"
                   color="primary"
                   className="Org"
-                  onClick={()=>{history.push("//generate-certificate")}}
+                  onClick={()=>{history.push("/generate-certificate")}}
                   style={{position:"absolute",top:"30%",left:"10%",width:"33%"}}
                 >Generate Certificate</Button>
                 </div>

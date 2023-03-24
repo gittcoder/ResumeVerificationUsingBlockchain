@@ -113,15 +113,7 @@ class GenerateForm extends React.Component {
       phone,
       pass,
       
-    ).then(data => {
-      console.log(data);
-      if (data.data !== undefined)
-        this.setState({
-          currentState: "validate",
-          UserName: data.data.User
-        });
-    })
-    .catch(err => console.log(err));
+    )
     // let candidateName = `${orgname} ${orgregno}`;
     // let assignDate = new Date(assignedOn).getTime();
     // generateCertificate(

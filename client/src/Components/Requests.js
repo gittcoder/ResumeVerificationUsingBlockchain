@@ -104,23 +104,19 @@ class GenerateForm extends React.Component {
         ReqTo,
         Message,
         Shared,
-        Status
+        Status,
+        OrgName
     } = this.state;
+    console.log(localStorage.getItem("orgname"))
     RequestCertificates(localStorage.getItem("user"),
       localStorage.getItem("pwd"),
       ReqTo,
       Message,
+      localStorage.getItem("orgname"),
       
       
-    ).then(data => {
-      console.log(data);
-      if (data.data !== undefined)
-        this.setState({
-          currentState: "validate",
-          UserName: data.data.User
-        });
-    })
-    .catch(err => console.log(err));
+    )
+    
     // let candidateName = `${firstname} ${Message}`;
     // let assignDate = new Date(assignedOn).getTime();
     // generateCertificate(

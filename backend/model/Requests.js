@@ -27,6 +27,11 @@ const ReqSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
+  },
+  OrgName: {
+    type: String,
+    required: true,
+    trim: true
   }
 
   
@@ -37,10 +42,7 @@ ReqSchema.methods.toJSON = function() {
   const obj = data.toObject();
 
   return {
-    obj,
-    User: obj.UserName.toString(),
-    _id: undefined,
-    __v: undefined
+  
   };
 };
 

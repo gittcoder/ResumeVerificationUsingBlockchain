@@ -70,7 +70,8 @@ app.post("/login", (req, res) => {
         }
         else
         {
-          res.json({result:"Success",privilege:"organization"});
+          console.log(data);
+          res.json({result:"Success",privilege:"organization",orgname:data["0"]["OrgName"]});
         }})
 
     }
@@ -196,7 +197,7 @@ app.post("/certificate/generate", (req, res) => {
             data: dbRes
           });
         })
-        .catch(err => res.status(500).send(err));
+        .catch(err => {console.log(err);res.status(500).send(err)});
     })
     .catch(err => {
       console.log(err);
@@ -224,14 +225,15 @@ app.listen(port, () => {
 
 
 app.post("/RequestCertificate",(req,res)=>{
-  const {Email,Password,ReqTo,Message} = req.body;
+  const {Email,Password,ReqTo,Message,OrgName} = req.body;
   OrgReg.find({Email,Password}).then(data=>{
     if(data.length!==0)
     {
-  const Requests= new Requests({Email,ReqTo,Message,Shared:"",Status:"pending"})
+     
+  const req= new Requests({Email,ReqTo,Message,Shared:"no",Status:"pending",OrgName})
     
-    Requests
-      .save().then(res.status(200).send({result:"Success"})).catch(err => {console.log(err);
+    req
+      .save().then(res.status(200).json({result:"Success"})).catch(err => {console.log(err);
         res.status(400).send(err)});
     // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
   }
@@ -245,21 +247,25 @@ app.post("/RequestCertificate",(req,res)=>{
 
 app.post("/certificateList", (req, res) => {
   const { email, pass } = req.body;
+ 
   console.log(req.body);
   Login.find({emailId:email,Password:pass}).then(data=>{
   if(data.length!==0)
   {
+    let r=[]
     console.log("Success!!!");
     Certificates.find({emailId:email}).then(entries=>{
-   
-     res.json(entries);
+      Requests.find({ReqTo:email}).then(entries2=>{
+        // console.log(JSON.stringify(entries2[0]));
+        entries2.forEach(data=>{
+          r.push({_id:data._id,Email:data.Email,ReqTo:data.ReqTo,Message:data.Message,Shared:data.Shared,Status:data.Status,OrgName:data.OrgName})
+        })
+       res.send([JSON.stringify(entries),JSON.stringify(r)])
+      })
       
     })
-    Requests.find({ReqTo:email}).then(entries=>{
-   
-      console.log(entries);
-       
-     })
+    
+     
     // const login = new Login({
     //   UserName:username, Password:pass, FirstName:firstname, LastName:lastname, Email:email, Phone:phone, Gender:gender,emailId
     // });
