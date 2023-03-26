@@ -245,25 +245,47 @@ app.post("/RequestCertificate",(req,res)=>{
 
 })
 
-app.post("/certificateList", (req, res) => {
+app.post("/ApproveRequest",(req,res)=>{
+  const {Email,Password,Shared,id} = req.body;
+  Login.find({Email,Password}).then(data=>{
+    if(data.length!==0)
+    {
+     
+      Requests.findOneAndUpdate({_id:id},{Shared: Shared,Status:"approved"}).then((data)=>
+      {
+        console.log(data)
+        res.send({result:"Success"})
+      })
+    // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+  }
+  else
+  {
+    res.status(400).send({status:"User Exists!!!"});
+  }
+})
+
+})
+
+app.post("/ViewRequests", (req, res) => {
   const { email, pass } = req.body;
  
   console.log(req.body);
-  Login.find({emailId:email,Password:pass}).then(data=>{
+  OrgReg.find({emailId:email,Password:pass}).then(data=>{
   if(data.length!==0)
   {
     let r=[]
     console.log("Success!!!");
-    Certificates.find({emailId:email}).then(entries=>{
-      Requests.find({ReqTo:email}).then(entries2=>{
+    
+      Requests.find({Email:email}).then(entries2=>{
         // console.log(JSON.stringify(entries2[0]));
         entries2.forEach(data=>{
+          console.log(data)
           r.push({_id:data._id,Email:data.Email,ReqTo:data.ReqTo,Message:data.Message,Shared:data.Shared,Status:data.Status,OrgName:data.OrgName})
         })
-       res.send([JSON.stringify(entries),JSON.stringify(r)])
+       res.send(JSON.stringify(r))
       })
       
-    })
+   
     
      
     // const login = new Login({
@@ -289,5 +311,51 @@ app.post("/certificateList", (req, res) => {
   
     
     });
+
+
+    app.post("/certificateList", (req, res) => {
+      const { email, pass } = req.body;
+     
+      console.log(req.body);
+      Login.find({emailId:email,Password:pass}).then(data=>{
+      if(data.length!==0)
+      {
+        let r=[]
+        console.log("Success!!!");
+        Certificates.find({emailId:email}).then(entries=>{
+          Requests.find({ReqTo:email}).then(entries2=>{
+            // console.log(JSON.stringify(entries2[0]));
+            entries2.forEach(data=>{
+              r.push({_id:data._id,Email:data.Email,ReqTo:data.ReqTo,Message:data.Message,Shared:data.Shared,Status:data.Status,OrgName:data.OrgName})
+            })
+           res.send([JSON.stringify(entries),JSON.stringify(r)])
+          })
+          
+        })
+        
+         
+        // const login = new Login({
+        //   UserName:username, Password:pass, FirstName:firstname, LastName:lastname, Email:email, Phone:phone, Gender:gender,emailId
+        // });
+      
+        // login
+        //   .save().then(res.status(200).send({result:"Success"})).catch(err => {console.log(err);
+        //     res.status(400).send(err)});
+        // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+      }
+      else
+      {
+        res.status(400).send({status:"User Exists!!!"});
+      }
+    })
+      // const given = new Date(assignDate);
+    
+      // let expirationDate = given.setFullYear(given.getFullYear() + duration);
+    
+      // expirationDate = expirationDate.toString();
+    
+      
+        
+        });
 
 module.exports = { app };

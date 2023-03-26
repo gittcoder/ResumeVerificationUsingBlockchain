@@ -218,3 +218,65 @@ export const RequestCertificates =(UserName,Password,ReqTo,Message,OrgName
       console.log(err);
     });
 }
+
+export const ApproveRequests =(UserName,Password,Shared,id
+  ) =>
+{
+
+  fetch(`${host}/ApproveRequest`, {
+    ...postHeader,
+    body: JSON.stringify({
+      Email:UserName,
+      Password,
+      Shared,
+      id
+      
+    })
+  })
+  .then(async res =>{ if(res.status===200)
+    {
+      await res.json().then(
+        (body)=>{
+          console.log(body.result);
+          if(body.result=="Success")
+          {
+            history.push("/dashboard");
+          }
+        }
+      )
+    }})
+    .catch(err => {
+      console.log(err);
+    });
+}
+
+export const OrgViewRequests =(UserName,Password,Shared,id
+  ) =>
+{
+
+  fetch(`${host}/ApproveRequest`, {
+    ...postHeader,
+    body: JSON.stringify({
+      Email:UserName,
+      Password,
+      Shared,
+      id
+      
+    })
+  })
+  .then(async res =>{ if(res.status===200)
+    {
+      await res.json().then(
+        (body)=>{
+          console.log(body.result);
+          if(body.result=="Success")
+          {
+            history.push("/dashboard");
+          }
+        }
+      )
+    }})
+    .catch(err => {
+      console.log(err);
+    });
+}
