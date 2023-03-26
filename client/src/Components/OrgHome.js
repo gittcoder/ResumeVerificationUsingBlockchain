@@ -27,88 +27,14 @@ class OrgHome extends Component
     status:"",
     addCer:"",
     added:[],
-    shared:"",
+    shared:[],
     approved:false,
     display:"0",
 
   }
 
-  handleAdd = event =>
-  {
-    event.preventDefault();
-    this.state.certificates.map((item)=>
-    {
-      if(item._id===this.state.addCer)
-      {
-        // this.setState({
-        //   added:[...this.state.added,this.state.addCer],
-        //   shared:this.state.shared+","+this.state.addCer
-        // });
-        this.setState({added:[...this.state.added,{_id:item._id,orgname:item.orgName,title:item.courseName}]})
-      }
-    })
-    
 
 
-    console.log(this.state.addCer)
-  }
-
-
-  handleSubmit = event => {
-    event.preventDefault();
-    if (this.state.currentState === "validate") {
-      return;
-    }
-    this.setState({ currentState: "load" });
-   let shared=""
-   this.state.added.map((item)=>
-   {
-    shared+=item._id+",";
-   })
-    console.log(localStorage.getItem("orgname"))
-    OrgViewRequests(localStorage.getItem("user"),
-      localStorage.getItem("pwd"),
-      shared,
-      this.state.requests[this.state.reqid]["_id"]
-      
-      
-    )
-    
-    // let candidateName = `${firstname} ${Message}`;
-    // let assignDate = new Date(assignedOn).getTime();
-    // generateCertificate(
-    //   candidateName,
-    //   coursename,
-    //   organization,
-    //   assignDate,
-    //   parseInt(duration),
-    //   emailId
-    // )
-      // .then(data => {
-      //   if (data.data !== undefined)
-      //     this.setState({
-      //       currentState: "validate",
-      //       User: data.data.User
-      //     });
-      // })
-      // .catch(err => console.log(err));
-  };
-
-  handleRemove = x => event =>
-  {
-    console.log("Inside remove")
-    event.preventDefault();
-    let c= []
-    this.state.added.map((item,index)=>
-    {
-       if(index!==x)
-       {
-          c.push(item);
-       }
-    })
-    this.setState({added:c})
-
-  }
 
   handleChange = name => event => {
     this.setState({
@@ -148,7 +74,7 @@ const getHeader = {
           await res.json().then(
             (body)=>{
               let c=[]
-              let req = JSON.parse(body)
+              let req = JSON.parse(body["0"])
           
               req.forEach((entries)=>
               {
@@ -156,8 +82,8 @@ const getHeader = {
               
               })
               this.setState({requests:c})
-              
-              console.log(this.state.requests[this.state.reqid].OrgName);
+              console.log("Hello!!!!")
+              // console.log(this.state.requests[this.state.reqid].OrgName);
              }
           )
           
@@ -246,7 +172,7 @@ const getHeader = {
             <Card className={"c"+index} key={index} 
             sx={{boxShadow: "10px 10px 20px rgb(30,30,30)"}}
             style={{width:"15vw",height:"20vh",borderRadius:"20px",position:"relative",left:"2%",marginTop:"20px",marginBottom:"20px"}}> 
-              <Typography style={{fontSize:"15px"}}>Organization : {item.OrgName}</Typography>
+              <Typography style={{fontSize:"15px"}}>Request To : {item.ReqTo }</Typography>
   
               
           
@@ -254,6 +180,9 @@ const getHeader = {
               style={{position:"relative",top:"10%",left:"35%",marginBottom:"30px"}}
               className={"b"+index}
               onClick={()=>{
+                let s=[]
+                let c=[]
+                let a=[]
                 if(this.state.requests[index].Status==="approved")
                 {
                   this.setState({approved:true,display:"0"})
@@ -262,7 +191,21 @@ const getHeader = {
                 {
                     this.setState({approved:false,display:"1"})
               }
-              this.setState({added:[],nav:true,reqid:index,orgname:this.state.requests[index].OrgName,status:this.state.requests[index].Status,message:this.state.requests[index].Message});console.log(this.state.requests[this.state.reqid].OrgName)}}
+              
+              if(this.state.requests[index].shared!=="no")
+              {
+                
+                  s= this.state.requests[index].Shared.split(",");
+                  for(let i=0;i<s.length-1;i++)
+                  {
+                      a=s[i].split(":")
+                      c.push({_id:a[0],title:a[1]})
+                  }
+              }
+              this.setState({shared:c,nav:true,reqid:index,orgname:this.state.requests[index].OrgName,status:this.state.requests[index].Status,message:this.state.requests[index].Message});console.log(this.state.requests[this.state.reqid].OrgName)
+
+            }}
+              
               variant="outlined"
               color="primary"
               >
@@ -325,17 +268,17 @@ const getHeader = {
                        
                         <div ><p style={{margin:"20px 20px 20px",border:"2px solid blue",width:"80%",marginBottom:"3vh"}}>{this.state.message}</p></div>
                         
-                        <div className="added Certificates" style={{position:"relative",top:"10%",left:"10%"}}>
+                        <div className="added Certificates" style={{position:"relative",top:"10%",left:"10%",marginBottom:"4vh"}}>
                           {
-                            this.state.added.map((item,index)=>
+                            this.state.shared.map((item,index)=>
                             (
                               <div>
                                 <Grid  key={index} style={{position:"relative",top:"10%",left:"10%"}} container >
                                 <Grid item>
-                                    <Typography >{item.orgname+"-"+item.title}</Typography>
+                                    <Typography variant="h5" style={{marginRight:"3vw",marginBottom:"2vh"}}>{item.title}</Typography>
                                 </Grid>
                                 <Grid item>
-                                <Button  onClick={this.handleRemove(index)}>X</Button>
+                                <Button  onClick={()=>{history.push("/display/certificate/"+item._id)}} variant = "contained">View</Button>
                                 </Grid>
                             </Grid>
                               
@@ -343,50 +286,18 @@ const getHeader = {
                             ))
                           }
                         </div>
-                        <div className="ChooseCertificates" style={{position:"relative",top:"20%",left:"10%",marginTop:"2vh",opacity:this.state.display}} >
-                        <TextField
-                        id="filled-select-currency"
-                        select
-                        label="Select Certificate"
-                        value={this.state.addCer}
-                        onChange={this.handleChange("addCer")}
-                        color="primary"
-                        variant="outlined"
-                        style={{
-                          width: "10vw",
-                          height: "10vh",
-                    
-
-                       
-                        }}
-                      >
                         
-                        {this.state.certificates.map((option) => (
-                          <MenuItem key={option._id} value={option._id}>
-                            {option.OrgName}-{option.courseName}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                      <Button
-                      color="primary"
-                      variant="contained"
-                      style={{height:"7vh",position:"relative",top:"40%",left:"10%"}}
-                      onClick={this.handleAdd}
-                      >
-                        Add +
-                      </Button>
-                        </div>
                         {this.state.approved===true?(<VerifyBadge />):(                       
                            <Button 
-                      color="primary"
+                      
                       variant="contained"
                       style={{
                         position:"relative",
                         top:"220%",
                         left:"35%"
                       }}
-                      onClick={this.handleSubmit}>
-                        Approve
+              >
+                        Pending
                         </Button>
                         )
                         }

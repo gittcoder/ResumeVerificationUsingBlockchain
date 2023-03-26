@@ -282,7 +282,7 @@ app.post("/ViewRequests", (req, res) => {
           console.log(data)
           r.push({_id:data._id,Email:data.Email,ReqTo:data.ReqTo,Message:data.Message,Shared:data.Shared,Status:data.Status,OrgName:data.OrgName})
         })
-       res.send(JSON.stringify(r))
+       res.send([JSON.stringify(r)])
       })
       
    

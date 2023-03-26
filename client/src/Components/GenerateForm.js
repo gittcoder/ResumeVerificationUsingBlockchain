@@ -83,8 +83,8 @@ class GenerateForm extends React.Component {
   state = {
     firstname: "",
     lastname: "",
-    organization: "FossAsia",
-    orgLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/FOSSASIA_Logo.svg/600px-FOSSASIA_Logo.svg.png",
+    organization: localStorage.getItem("orgname"),
+
     coursename: "",
     assignedOn: null,
     duration: 0,
@@ -275,18 +275,7 @@ class GenerateForm extends React.Component {
             </form>
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <Paper className={classes.rightpaper}>
-            <div style={{ maxWidth: "90%" }}>
-              <img src={orgLogo} alt="org-logo" style={{ maxWidth: "100%" }} />
-            </div>
-            <div>
-              <Typography variant="h5" color="inherit" noWrap>
-                {organization}
-              </Typography>
-            </div>
-          </Paper>
-        </Grid>
+        
       </Grid>
     );
   }

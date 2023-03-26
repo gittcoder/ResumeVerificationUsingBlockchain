@@ -61,7 +61,7 @@ class Dashboard extends Component{
    let shared=""
    this.state.added.map((item)=>
    {
-    shared+=item._id+",";
+    shared+=item._id+":"+item.title+",";
    })
     console.log(localStorage.getItem("orgname"))
     ApproveRequests(localStorage.getItem("user"),
