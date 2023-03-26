@@ -324,7 +324,7 @@ app.post("/ViewRequests", (req, res) => {
         console.log("Success!!!");
         Certificates.find({emailId:email}).then(entries=>{
           Requests.find({ReqTo:email}).then(entries2=>{
-            // console.log(JSON.stringify(entries2[0]));
+            console.log(JSON.stringify(entries));
             entries2.forEach(data=>{
               r.push({_id:data._id,Email:data.Email,ReqTo:data.ReqTo,Message:data.Message,Shared:data.Shared,Status:data.Status,OrgName:data.OrgName})
             })

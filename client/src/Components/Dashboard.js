@@ -147,14 +147,14 @@ const getHeader = {
             (body)=>{
               let c=[]
               let cert = JSON.parse(body["0"])
-              // console.log(body["1"]);
+              console.log(body["0"]);
               cert.forEach((entries)=>
               {
                 c.push(entries["obj"]);
               
               })
               this.setState({certificates:c})
-              console.log(JSON.parse(body["1"]))
+              console.log(this.state.certificates)
               let req = JSON.parse(body["1"])
               c=[]
               req.forEach((entries)=>
@@ -191,7 +191,7 @@ const getHeader = {
                 <Typography component="h1" variant="h3" style={{position:"relative",top:"13%",left:"6%"}}>
                 My Certificates
               </Typography>
-              {this.state.requests.length===0?(
+              {this.state.certificates.length===0?(
                 <div style={{
                   display:"flex",
                   flexDirection:"row",
