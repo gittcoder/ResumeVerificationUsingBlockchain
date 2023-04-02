@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import "./App.css";
-import SignIn from "./Components/SignIn";
+// import SignIn from "./Components/LoginSignUp/SignIn";
 
 import { Switch, Route } from "react-router-dom";
-import NavBar from "./Components/NavBar";
-import Homepage from "./Components/Homepage";
-import Dashboard from "./Components/Dashboard";
-import GenerateForm from './Components/GenerateForm';
-import SignUp from './Components/SignUp'
+import NavBar from "./Components/NavBar/NavBar";
+import Homepage from "./Components/HomePage/Homepage";
+import Dashboard from "./Components/User/Dashboard";
+import GenerateForm from './Components/Organisation/GenerateForm';
+import SignUp from './Components/LoginSignUp/SignUp'
 import history from './Utils/history'
 import { CookiesProvider } from "react-cookie";
-import viewCertificate from "./Components/viewCertificate"
-import SignUpOptions from "./Components/SignUpOptions";
-import OrgReg from "./Components/OrgReg";
-import OrgHome from "./Components/OrgHome";
-import Requests from "./Components/Requests";
+import viewCertificate from "./Components/User/viewCertificate"
+import SignUpOptions from "./Components/LoginSignUp/SignUpOptions";
+import OrgReg from "./Components/Organisation/OrgReg";
+import OrgHome from "./Components/Organisation/OrgHome";
+import Requests from "./Components/Organisation/Requests";
+import LoginSignUp from "./Components/LoginSignUp/LoginSignUp";
+import ContactUs from "./Components/ContactUs/ContactUs"
+import AboutUs from "./Components/AboutUs/AboutUs"
 
 class App extends Component {
   render() {
@@ -25,7 +28,7 @@ class App extends Component {
         
         <Switch history={history}>
           <Route exact path="/" component={Homepage} />
-          <Route path="/login" component={SignIn} />
+          <Route path="/login" component={LoginSignUp} />
           <Route path="/SignUp" component={SignUp} />
           <Route path="/OrgReg" component={OrgReg} />
           <Route path="/OrgHome" component={OrgHome} />
@@ -34,6 +37,8 @@ class App extends Component {
           <Route path="/display/certificate/:id" component={viewCertificate} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/Requests" component={Requests} />
+          <Route path="/ContactUs" component={ContactUs} />
+          <Route path="/AboutUs" component={AboutUs} />
         </Switch>
         </CookiesProvider>
       </div>

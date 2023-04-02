@@ -12,13 +12,13 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
-import ChainImage from "../Images/logo-securify.png";
-import ChainImage2 from "../Images/logo-securify.png";
-import history from "../Utils/history"
+import ChainImage from "../../Images/logo-securify.png";
+import ChainImage2 from "../../Images/logo-securify.png";
+import history from "../../Utils/history"
 import signincss from "./signin.css"
 
 
-import { login } from "../Utils/apiConnect";
+import { login } from "../../Utils/apiConnect";
 
 const styles = theme => ({
   hidden: {

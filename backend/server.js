@@ -102,7 +102,7 @@ app.post("/signup", (req, res) => {
     login
       .save().then(res.status(200).send({result:"Success",privilege:"normal"})).catch(err => {console.log(err);
         res.status(400).send(err)});
-    // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+    
   }
   else
   {
@@ -110,15 +110,6 @@ app.post("/signup", (req, res) => {
   }
 })
 
-
-
-  // const given = new Date(assignDate);
-
-  // let expirationDate = given.setFullYear(given.getFullYear() + duration);
-
-  // expirationDate = expirationDate.toString();
-
-  
     
     });
 
@@ -141,7 +132,7 @@ app.post("/signup", (req, res) => {
         login
           .save().then(res.status(200).send({result:"Success",privilege:"organization"})).catch(err => {console.log(err);
             res.status(400).send(err)});
-        // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+
       }
       else
       {
@@ -150,12 +141,7 @@ app.post("/signup", (req, res) => {
     })
     
     
-    
-      // const given = new Date(assignDate);
-    
-      // let expirationDate = given.setFullYear(given.getFullYear() + duration);
-    
-      // expirationDate = expirationDate.toString();
+   
     
       
         
@@ -235,7 +221,7 @@ app.post("/RequestCertificate",(req,res)=>{
     req
       .save().then(res.status(200).json({result:"Success"})).catch(err => {console.log(err);
         res.status(400).send(err)});
-    // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+
   }
   else
   {
@@ -256,7 +242,7 @@ app.post("/ApproveRequest",(req,res)=>{
         console.log(data)
         res.send({result:"Success"})
       })
-    // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+
   }
   else
   {
@@ -286,27 +272,13 @@ app.post("/ViewRequests", (req, res) => {
       })
       
    
-    
-     
-    // const login = new Login({
-    //   UserName:username, Password:pass, FirstName:firstname, LastName:lastname, Email:email, Phone:phone, Gender:gender,emailId
-    // });
-  
-    // login
-    //   .save().then(res.status(200).send({result:"Success"})).catch(err => {console.log(err);
-    //     res.status(400).send(err)});
-    // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
   }
   else
   {
     res.status(400).send({status:"User Exists!!!"});
   }
 })
-  // const given = new Date(assignDate);
 
-  // let expirationDate = given.setFullYear(given.getFullYear() + duration);
-
-  // expirationDate = expirationDate.toString();
 
   
     
@@ -334,26 +306,14 @@ app.post("/ViewRequests", (req, res) => {
         })
         
          
-        // const login = new Login({
-        //   UserName:username, Password:pass, FirstName:firstname, LastName:lastname, Email:email, Phone:phone, Gender:gender,emailId
-        // });
-      
-        // login
-        //   .save().then(res.status(200).send({result:"Success"})).catch(err => {console.log(err);
-        //     res.status(400).send(err)});
-        // Login.insertMany([{UserName:user,Password:pass,FirstName:fname,LastName:lname,Email:email,Phone:phone,Gender:gender}]);
+    
       }
       else
       {
         res.status(400).send({status:"User Exists!!!"});
       }
     })
-      // const given = new Date(assignDate);
-    
-      // let expirationDate = given.setFullYear(given.getFullYear() + duration);
-    
-      // expirationDate = expirationDate.toString();
-    
+
       
         
         });

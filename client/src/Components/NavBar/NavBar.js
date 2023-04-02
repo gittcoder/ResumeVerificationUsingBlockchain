@@ -14,9 +14,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Link from "react-router-dom/Link";
-import history from "../Utils/history";
+import history from "../../Utils/history";
 import { Button } from "@material-ui/core";
-import imgLogo from "../Images/logo-securify.png";
+import imgLogo from "../../Images/logo-securify.png";
 import navbarcss from "./navbarcss.css";
 
 

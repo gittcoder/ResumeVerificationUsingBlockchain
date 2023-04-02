@@ -5,8 +5,8 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import SubmitAnimation from "./SubmitAnimation";
-import { SignUp } from "../Utils/apiConnect";
+import SubmitAnimation from "../Animation/SubmitAnimation";
+import { RequestCertificates } from "../../Utils/apiConnect";
 
 const styles = theme => ({
   container: {
@@ -78,12 +78,11 @@ const styles = theme => ({
 
 class GenerateForm extends React.Component {
   state = {
-    firstname:"",
-      lastname:"",
-      email:"",
-      phone:"",
-      gender:"",
-      pass:"",
+    UserName:"",
+      ReqTo:"",
+      Message:"",
+      Shared:"",
+      Status:"",
       User:"",
       currentState:"normal"
   };
@@ -101,21 +100,24 @@ class GenerateForm extends React.Component {
     }
     this.setState({ currentState: "load" });
     const {
-      firstname,
-      lastname,
-      email,
-      phone,
-      gender,
-      pass
+        UserName,
+        ReqTo,
+        Message,
+        Shared,
+        Status,
+        OrgName
     } = this.state;
-    SignUp(firstname+lastname+phone,pass,firstname,
-      lastname,
-      email,
-      phone,
-      gender,
+    console.log(localStorage.getItem("orgname"))
+    RequestCertificates(localStorage.getItem("user"),
+      localStorage.getItem("pwd"),
+      ReqTo,
+      Message,
+      localStorage.getItem("orgname"),
+      
       
     )
-    // let candidateName = `${firstname} ${lastname}`;
+    
+    // let candidateName = `${firstname} ${Message}`;
     // let assignDate = new Date(assignedOn).getTime();
     // generateCertificate(
     //   candidateName,
@@ -138,12 +140,11 @@ class GenerateForm extends React.Component {
   render() {
     const { classes } = this.props;
     const {
-      firstname,
-      lastname,
-      email,
-      phone,
-      gender,
-      pass,
+      UserName,
+      ReqTo,
+      Message,
+      Shared,
+      Status,
       User,
       currentState
     } = this.state;
@@ -152,7 +153,7 @@ class GenerateForm extends React.Component {
         <Grid item xs={12} sm={8}>
           <Paper className={classes.paper}>
             <Typography variant="h3" color="inherit">
-             Sign Up Form
+             Request Certificates
             </Typography>
             <form
               className={classes.container}
@@ -163,72 +164,27 @@ class GenerateForm extends React.Component {
                 <TextField
                   required
                   id="firstname"
-                  label="First Name"
+                  label="Request To"
                   className={classes.textField}
-                  value={firstname}
-                  onChange={this.handleChange("firstname")}
+                  value={ReqTo}
+                  onChange={this.handleChange("ReqTo")}
                   margin="normal"
                   variant="outlined"
                 />
                 <TextField
                   required
-                  id="lastname"
-                  label="Last Name"
+                  id="Message"
+                  label="Message"
                   className={classes.textField}
-                  value={lastname}
-                  onChange={this.handleChange("lastname")}
+                  value={Message}
+                  onChange={this.handleChange("Message")}
                   margin="normal"
                   variant="outlined"
                 />
                 
               </Grid>
              
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="email"
-                  label="Email"
-                  className={classes.textField}
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  margin="normal"
-                  variant="outlined"
-                  value={email}
-                  onChange={this.handleChange("email")}
-                />
-                <TextField
-                  required
-                  id="Phone"
-                  label="Phone"
-                  className={classes.textField}
-                  value={phone}
-                  onChange={this.handleChange("phone")}
-                  margin="normal"
-                  variant="outlined"
-                />
-                <TextField
-                  required
-                  id="gender"
-                  label="gender"
-                  className={classes.textField}
-                  value={gender}
-                  onChange={this.handleChange("gender")}
-                  margin="normal"
-                  variant="outlined"
-                />
-                
-                <TextField
-                  required
-                  id="pwd"
-                  label="Password"
-                  className={classes.textField}
-                  value={pass}
-                  onChange={this.handleChange("pass")}
-                  margin="normal"
-                  variant="outlined"
-                />
-              </Grid>
+             
               <Grid item xs={12} sm={12}>
                 <SubmitAnimation
                   currentState={currentState}

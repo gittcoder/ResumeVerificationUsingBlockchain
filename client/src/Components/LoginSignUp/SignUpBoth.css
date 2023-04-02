@@ -1,0 +1,38 @@
+.SignUp-img{
+    height:130px;
+    margin-bottom:20px;
+
+}
+
+.SignUp-grid-container{
+    display:grid;
+  grid-template-columns: auto auto;
+  width:600px;
+  text-align:center;
+  margin:auto auto;
+  padding:4% 0%;
+border-radius:10px;
+
+}
+
+
+.SignUp-page-first{
+    text-align:center;
+    margin:20px auto;
+}
+
+.Signup-grid-item{
+  
+margin:2%;
+}
+
+.SignUp-logIn{
+    grid-column-end:span 2;
+}
+
+.Normal-User,.Org{
+    background-color:#349EF4 !important;
+    color:white !important;
+    border-radius:100px !important;
+
+}

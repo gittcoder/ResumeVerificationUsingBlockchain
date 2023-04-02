@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import history from "../Utils/history";
+import history from "../../Utils/history";
 import Button from "@material-ui/core/Button";
 
 const styles = theme => ({

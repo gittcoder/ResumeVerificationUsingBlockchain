@@ -1,8 +1,8 @@
 import React from "react";
 import "./home-page-style.css";
 
-import home1 from "../Images/home1.jpg";
-import home2 from "../Images/home2.jpg";
+import home1 from "../../Images/home1.jpg";
+import home2 from "../../Images/home2.jpg";
 
 
 function Homepage(props) {

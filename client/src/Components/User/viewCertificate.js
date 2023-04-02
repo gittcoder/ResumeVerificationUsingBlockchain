@@ -4,15 +4,15 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import VerifyBadge from "./VerifyBadge";
-import FailureBadge from "./FailureBadge";
+import VerifyBadge from "../Animation/VerifyBadge";
+import FailureBadge from "../Animation/FailureBadge";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Tooltip from "@material-ui/core/Tooltip";
 import HelpIcon from "@material-ui/icons/Help";
 import LockIcon from "@material-ui/icons/Lock";
-import { getCertificate, verifyCertificate } from "../Utils/apiConnect";
-import Loader from "./Loader";
-import Certificate from "./Certificate";
+import { getCertificate, verifyCertificate } from "../../Utils/apiConnect";
+import Loader from "../Animation/Loader";
+import Certificate from "../Organisation/Certificate";
 
 const styles = theme => ({
   root: {

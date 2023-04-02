@@ -5,11 +5,8 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import SubmitAnimation from "./SubmitAnimation";
-import { generateCertificate } from "../Utils/apiConnect";
-import { Cookies } from 'react-cookie';
-import { instanceOf } from 'prop-types';
-
+import SubmitAnimation from "../Animation/SubmitAnimation";
+import {OrgReg } from "../../Utils/apiConnect";
 
 const styles = theme => ({
   container: {
@@ -81,22 +78,15 @@ const styles = theme => ({
 
 class GenerateForm extends React.Component {
   state = {
-    firstname: "",
-    lastname: "",
-    organization: localStorage.getItem("orgname"),
-
-    coursename: "",
-    assignedOn: null,
-    duration: 0,
-    currentState: "normal",
-    emailId: "",
-    cookies: instanceOf(Cookies).isRequired
+    orgname:"",
+      orgregno:"",
+      email:"",
+      phone:"",
+      gender:"",
+      pass:"",
+      User:"",
+      currentState:"normal"
   };
-
-  // componentDidMount()
-  // {
-  //   this.state.cookies.get('user')
-  // }
 
   handleChange = name => event => {
     this.setState({
@@ -111,53 +101,56 @@ class GenerateForm extends React.Component {
     }
     this.setState({ currentState: "load" });
     const {
-      firstname,
-      lastname,
-      organization,
-      coursename,
-      assignedOn,
-      duration,
-      emailId
+      orgname,
+      orgregno,
+      email,
+      phone,
+      pass,
     } = this.state;
-    let candidateName = `${firstname} ${lastname}`;
-    let assignDate = new Date(assignedOn).getTime();
-    generateCertificate(
-      candidateName,
-      coursename,
-      organization,
-      assignDate,
-      parseInt(duration),
-      emailId
+    OrgReg(orgname,
+      orgregno,
+      email,
+      phone,
+      pass,
+      
     )
-      .then(data => {
-        if (data.data !== undefined)
-          this.setState({
-            currentState: "validate",
-            certificateId: data.data.certificateId
-          });
-      })
-      .catch(err => console.log(err));
+    // let candidateName = `${orgname} ${orgregno}`;
+    // let assignDate = new Date(assignedOn).getTime();
+    // generateCertificate(
+    //   candidateName,
+    //   coursename,
+    //   organization,
+    //   assignDate,
+    //   parseInt(duration),
+    //   emailId
+    // )
+      // .then(data => {
+      //   if (data.data !== undefined)
+      //     this.setState({
+      //       currentState: "validate",
+      //       User: data.data.User
+      //     });
+      // })
+      // .catch(err => console.log(err));
   };
 
   render() {
     const { classes } = this.props;
     const {
-      firstname,
-      lastname,
-      organization,
-      coursename,
-      duration,
-      currentState,
-      orgLogo,
-      emailId,
-      certificateId
+      orgname,
+      orgregno,
+      email,
+      phone,
+      pass,
+      User,
+      currentState
     } = this.state;
     return (
       <Grid container>
         <Grid item xs={12} sm={8}>
           <Paper className={classes.paper}>
             <Typography variant="h3" color="inherit">
-              Certificate Generation Form
+             Sign Up Form
             </Typography>
             <form
               className={classes.container}
@@ -167,81 +160,27 @@ class GenerateForm extends React.Component {
               <Grid item xs={12} sm={12}>
                 <TextField
                   required
-                  id="firstname"
-                  label="First Name"
+                  id="orgname"
+                  label="Organization Name"
                   className={classes.textField}
-                  value={firstname}
-                  onChange={this.handleChange("firstname")}
+                  value={orgname}
+                  onChange={this.handleChange("orgname")}
                   margin="normal"
                   variant="outlined"
                 />
                 <TextField
                   required
-                  id="lastname"
-                  label="Last Name"
+                  id="orgregno"
+                  label="Registration No"
                   className={classes.textField}
-                  value={lastname}
-                  onChange={this.handleChange("lastname")}
+                  value={orgregno}
+                  onChange={this.handleChange("orgregno")}
                   margin="normal"
                   variant="outlined"
                 />
+                
               </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="organization"
-                  label="Organization"
-                  className={classes.textField}
-                  defaultValue={organization}
-                  margin="normal"
-                  variant="outlined"
-                  InputProps={{
-                    readOnly: true
-                  }}
-                />
-                <TextField
-                  required
-                  id="certified-for"
-                  label="Certified For"
-                  helperText="Any course name or skill for which the certificate is being given."
-                  placeholder="Degree, skill or award.."
-                  className={(classes.courseField, classes.textField)}
-                  defaultValue={coursename}
-                  onChange={this.handleChange("coursename")}
-                  margin="normal"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="assigned-date"
-                  label="Assigned Date"
-                  type="date"
-                  margin="normal"
-                  variant="outlined"
-                  onChange={this.handleChange("assignedOn")}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-                <TextField
-                  required
-                  id="duration"
-                  label="Duration"
-                  helperText="Duration to be provided in years"
-                  value={duration}
-                  onChange={this.handleChange("duration")}
-                  type="number"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  margin="normal"
-                  variant="outlined"
-                />
-              </Grid>
+             
               <Grid item xs={12} sm={12}>
                 <TextField
                   required
@@ -253,8 +192,30 @@ class GenerateForm extends React.Component {
                   autoComplete="email"
                   margin="normal"
                   variant="outlined"
-                  value={emailId}
-                  onChange={this.handleChange("emailId")}
+                  value={email}
+                  onChange={this.handleChange("email")}
+                />
+                <TextField
+                  required
+                  id="Phone"
+                  label="Phone"
+                  className={classes.textField}
+                  value={phone}
+                  onChange={this.handleChange("phone")}
+                  margin="normal"
+                  variant="outlined"
+                />
+               
+                
+                <TextField
+                  required
+                  id="pwd"
+                  label="Password"
+                  className={classes.textField}
+                  value={pass}
+                  onChange={this.handleChange("pass")}
+                  margin="normal"
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
@@ -268,14 +229,13 @@ class GenerateForm extends React.Component {
                     color="inherit"
                     className={classes.submitBtn}
                   >
-                    Certificate genrated with id {certificateId}
+                    Certificate generated with id {User}
                   </Typography>
                 )}
               </Grid>
             </form>
           </Paper>
         </Grid>
-        
       </Grid>
     );
   }
