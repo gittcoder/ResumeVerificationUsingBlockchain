@@ -2,7 +2,7 @@ import React from "react";
 import "./home-page-style.css";
 
 import home1 from "../../Images/home1.jpg";
-import home2 from "../../Images/home2.jpg";
+import home2 from "../../Images/home2.png";
 
 
 function Homepage(props) {
@@ -14,8 +14,8 @@ function Homepage(props) {
 <div className="home1">
   <div className="homepage-logo-title">
     <img className="sh" src={home2} />  <h1 className="home-title">Securify</h1></div>
-    <p><b>Your professional reputations starts here</b></p>
-    <p><b><i>Verify now!</i></b></p>
+    <p className="homepage-one"><b>Your professional reputations starts here</b></p>
+    <p className="homepage-two"><b><i>Verify now!</i></b></p>
 </div>
 
 <div className="home2">

@@ -56,23 +56,23 @@ class Container1 extends Component{
   };
 
 
-  container = document.querySelector(".container");
+  container = document.querySelector(".signin-signup-container");
 
   sign_up_btn_addEventListener=()=> {
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".signin-signup-container");
 
     container.classList.add("sign-up-mode");
   }
 
   sign_in_btn_addEventListener=()=> {
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".signin-signup-container");
 
     container.classList.remove("sign-up-mode");
   }
 
     render(){
   return (
-    <div className="container">
+    <div className="signin-signup-container">
       <div className="forms-container">
         <div className="signin-signup">
           <form action="#" className="sign-in-form">
@@ -85,7 +85,7 @@ class Container1 extends Component{
               <i className="fas fa-lock"></i>
               <input type="password" placeholder={this.state.Password} onChange={this.handleChange("Password")} />
             </div>
-            <input type="submit" value="Login" className="btn solid" onClick={this.submitData} />
+            <input type="submit" value="Login" className="login-page-btn solid" onClick={this.submitData} />
             <p className="social-text">Or Sign in with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
@@ -177,9 +177,9 @@ class Container1 extends Component{
           <div className="content">
             <h3>New here ?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+            If you are not currently registered with us, please sign up to create an account.
             </p>
+            <p>Verify your documents with securify..!</p>
             <button
               className="btn transparent"
               id="sign-up-btn"
@@ -194,8 +194,7 @@ class Container1 extends Component{
           <div className="content">
             <h3>One of us ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+            If you have already registered with us, please sign in to your account.
             </p>
             <button
               className="btn transparent"

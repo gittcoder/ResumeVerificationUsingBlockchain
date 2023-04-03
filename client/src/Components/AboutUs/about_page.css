@@ -9,6 +9,7 @@
     color: #f9004d;
     text-decoration: underline;
     font-size:20px;
+    font-weight: bold;
 }
 body{
     margin:0px;
@@ -63,12 +64,12 @@ body{
     color: #333;
     letter-spacing: 1px;
     line-height: 27px;
-    font-size: 18px;
+    font-size: 15px;
     margin-bottom: 45px;
 }
 
 
-a.button{
+.button-contact-us-about-page{
     background: #f9004d;
     color: white;
     text-decoration: none;
@@ -79,8 +80,9 @@ a.button{
     transition: .4s;
 }
 
-a.button:hover{
-    background: transparent;
+.button-contact-us-about-page:hover{
+    background: rgb(255, 255, 255);
+    color:#f9004d;
     border: 2px solid #f9004d;
     cursor:pointer;
 }
@@ -88,7 +90,7 @@ a.button:hover{
 .about-footer {
 	background-color: #333;
 	color: #f1f1f1;
-	padding: 35px;
+	padding: 25px;
 	text-align: center;
 	position: fixed;
 	bottom: 0;

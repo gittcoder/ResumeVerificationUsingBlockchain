@@ -146,97 +146,83 @@ class GenerateForm extends React.Component {
       currentState
     } = this.state;
     return (
-      <Grid container>
-        <Grid item xs={12} sm={8}>
-          <Paper className={classes.paper}>
-            <Typography variant="h3" color="inherit">
-             Sign Up Form
-            </Typography>
-            <form
-              className={classes.container}
+      <div class="SignUp-Body">
+  <div class="sign-up-container">
+    <div class="sign-up-title">Sign Up Form - Organisation</div>
+    <div class="sign-up-content">
+      <form  
+              className={classes.container + " form"}
               autoComplete="off"
               onSubmit={this.submitData}
             >
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="orgname"
-                  label="Organization Name"
-                  className={classes.textField}
-                  value={orgname}
-                  onChange={this.handleChange("orgname")}
-                  margin="normal"
-                  variant="outlined"
-                />
-                <TextField
-                  required
-                  id="orgregno"
-                  label="Registration No"
+      
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Organisation Name</span>
+            <input type="text" placeholder="Enter your name" required
+            id="orgname"
+            className={classes.textField}
+            value={orgname}
+            onChange={this.handleChange("orgname")}
+            />
+          </div>
+          <div class="input-box">
+            <span class="details">Registration number</span>
+            <input type="text" placeholder="Enter your Registration number" required
+            id="orgregno"
                   className={classes.textField}
                   value={orgregno}
                   onChange={this.handleChange("orgregno")}
-                  margin="normal"
-                  variant="outlined"
-                />
-                
-              </Grid>
-             
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="email"
-                  label="Email"
-                  className={classes.textField}
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  margin="normal"
-                  variant="outlined"
-                  value={email}
-                  onChange={this.handleChange("email")}
-                />
-                <TextField
-                  required
-                  id="Phone"
-                  label="Phone"
+                  />
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input placeholder="Enter your email" required id="email"
+            type="email"
+            className={classes.textField}
+            value={email}
+            onChange={this.handleChange("email")} /> 
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" required
+            id="Phone"
                   className={classes.textField}
                   value={phone}
-                  onChange={this.handleChange("phone")}
-                  margin="normal"
-                  variant="outlined"
-                />
-               
-                
-                <TextField
-                  required
-                  id="pwd"
-                  label="Password"
+                  onChange={this.handleChange("phone")} />
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input placeholder="Enter your password" required
+            id="pwd"
+            type="password"
                   className={classes.textField}
                   value={pass}
                   onChange={this.handleChange("pass")}
-                  margin="normal"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <SubmitAnimation
-                  currentState={currentState}
-                  className={classes.submitBtn}
-                />
-                {currentState === "validate" && (
-                  <Typography
-                    variant="caption"
-                    color="inherit"
-                    className={classes.submitBtn}
-                  >
-                    Certificate generated with id {User}
-                  </Typography>
-                )}
-              </Grid>
-            </form>
-          </Paper>
-        </Grid>
-      </Grid>
+            
+            />
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input placeholder="Confirm your password" required 
+            type="password"
+            />
+          </div>
+        </div>
+ 
+        <p className= "submit-button-reg">
+            <div className="sign-up-button"  >
+              <input type="submit" value="Register"
+              currentState={currentState}
+              className={classes.submitBtn } />
+            </div>
+            </p>
+      </form>
+    </div>
+  </div>
+
+</div>
+
     );
   }
 }

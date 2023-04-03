@@ -9,10 +9,10 @@ import "./contact-usjs.js";
 
 function ContactUs() {
   return (
-     <div className="container">
+     <div className="contact-us-container">
       <span className="big-circle"></span>
       <img src={shape} className="square" alt="" />
-      <div className="form">
+      <div className="contact-us-form">
         <div className="contact-info">
           <h3 className="title">Let's get in touch</h3>
           <p className="text">
@@ -36,7 +36,8 @@ function ContactUs() {
           </div>
 
           <div className="social-media">
-            <p>Connect with us :</p>
+            <p>Connect with us:</p>
+            <p>
             <div className="social-icons">
               <a href="#">
                 <i className="fab fa-facebook-f"></i>
@@ -51,6 +52,8 @@ function ContactUs() {
                 <i className="fab fa-linkedin-in"></i>
               </a>
             </div>
+           
+            </p>
           </div>
         </div>
 
@@ -58,26 +61,25 @@ function ContactUs() {
           <span className="circle one"></span>
           <span className="circle two"></span>
 
-          <form action="index.html" autocomplete="off">
+          <form action="/" autocomplete="off" className="Contact-us-form">
             <h3 className="title">Contact us</h3>
             <div className="input-container">
-              <input type="text" name="name" className="input" />
-              <label for="">Username</label>
+              <input type="text" name="name" className="input-contact-us" placeholder="Username" />
               <span>Username</span>
             </div>
             <div className="input-container">
-              <input type="email" name="email" className="input" />
-              <label for="">Email</label>
+              <input type="email" placeholder="email" className="input-contact-us" name="email" />
+              {/* <label for="">Email</label> */}
               <span>Email</span>
             </div>
             <div className="input-container">
-              <input type="tel" name="phone" className="input" />
-              <label for="">Phone</label>
+              <input type="tel" name="phone" className="input-contact-us" placeholder="phone"/>
+              {/* <label for="">Phone</label> */}
               <span>Phone</span>
             </div>
             <div className="input-container textarea">
-              <textarea name="message" className="input"></textarea>
-              <label for="">Message</label>
+              <textarea name="message" className="input-contact-us" placeholder="Any Message for us"></textarea>
+              {/* <label for="">Message</label> */}
               <span>Message</span>
             </div>
             <input type="submit" value="Send" className="btn" />

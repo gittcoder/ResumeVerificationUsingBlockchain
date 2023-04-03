@@ -217,19 +217,28 @@ const getHeader = {
                 Requests
               </Typography>
               {this.state.requests.length===0?(
-                <div style={{
-                  display:"flex",
-                  flexDirection:"row",
-                  flexFlow:"row wrap",
-                  backgroundColor:"#2096F3",
-                  margin:"0px",
-                  borderRadius:"5px",
-                  height:"auto",
-                 
-  
-                }}>
-                <p style={{color:"white" }} className="records-div">No Records Found!!!</p>
-                </div>
+               <div
+               style={{
+                 display: "flex",
+                 flexDirection: "row",
+                 flexFlow: "row wrap",
+                 backgroundColor: "#2096F3",
+                 margin: "10px 10px 10px",
+                 borderRadius: "10px",
+                 width: "90%",
+                 position: "relative",
+                 top: "12%",
+                 left: "6%",
+                 height: "auto",
+               }}
+             >
+               <span
+                 style={{ color: "white" }}
+                 className="certificate-view-dashboard"
+               >
+                 No Records Found..!
+               </span>
+             </div>
               ):(
                 <div style={{
                   display:"flex",

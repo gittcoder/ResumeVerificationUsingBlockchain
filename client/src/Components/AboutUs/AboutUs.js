@@ -1,8 +1,8 @@
 
-import './App.css';
 import home1 from "../../Images/home1.jpg"
 import "./index.css"
 import "./about_page.css";
+import history from "../../Utils/history";
 function AboutUs() {
   return (
        <div class="about-us-body">
@@ -25,8 +25,8 @@ function AboutUs() {
                 tamper-proof and verifiable digital record of each document verification. We believe that this
                 approach can revolutionize the document verification process, providing a secure and trustworthy
                 solution to prevent fraud, identity theft, and other malicious activities.</p>
-            <a href="https://google.com" class="button">Contact Us</a>
         </div>
+            <button  class="button-contact-us-about-page" onClick={()=>history.push("/ContactUs")}>Contact Us</button>
 
     </div>
 

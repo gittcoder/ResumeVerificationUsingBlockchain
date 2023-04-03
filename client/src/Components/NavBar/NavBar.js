@@ -186,6 +186,12 @@ class NavBar extends React.Component {
                   About Us
               
               </IconButton>
+              <IconButton color="inherit"
+              onClick={()=>{history.push("/ContactUs")}}>
+               
+                  Contact Us
+              
+              </IconButton>
               <Button variant="outlined" color="inherit" style={{color:"white",borderColor:"white"}}
               onClick={()=>{if(localStorage.getItem("user")===null)
               {
