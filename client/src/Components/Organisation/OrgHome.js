@@ -30,7 +30,7 @@ class OrgHome extends Component
     status:"",
     addCer:"",
     added:[],
-    shared:"",
+    shared:[],
     approved:false,
     display:"0",
 
@@ -294,6 +294,7 @@ const getHeader = {
               )}
               
         <div style={{position:"fixed",top:"15%",left:"15%"}}>
+        
         <Fade in={this.state.nav}>
                     <Grid
                         className="entry"
@@ -345,17 +346,17 @@ const getHeader = {
                        
                         <div ><p style={{margin:"20px 20px 20px",border:"2px solid blue",width:"80%",marginBottom:"3vh"}}>{this.state.message}</p></div>
                         
-                        <div className="added Certificates" style={{position:"relative",top:"10%",left:"10%"}}>
+                        <div className="added Certificates" style={{position:"relative",top:"10%",left:"10%",marginBottom:"4vh"}}>
                           {
-                            this.state.added.map((item,index)=>
+                            this.state.shared.map((item,index)=>
                             (
                               <div>
                                 <Grid  key={index} style={{position:"relative",top:"10%",left:"10%"}} container >
                                 <Grid item>
-                                    <Typography >{item.orgname+"-"+item.title}</Typography>
+                                    <Typography variant="h5" style={{marginRight:"3vw",marginBottom:"2vh"}}>{item.title}</Typography>
                                 </Grid>
                                 <Grid item>
-                                <Button  onClick={this.handleRemove(index)}>X</Button>
+                                <Button  onClick={()=>{history.push("/display/certificate/"+item._id)}} variant = "contained">View</Button>
                                 </Grid>
                             </Grid>
                               
@@ -363,46 +364,18 @@ const getHeader = {
                             ))
                           }
                         </div>
-                        <div className="ChooseCertificates" style={{position:"relative",top:"20%",left:"10%",marginTop:"2vh",opacity:this.state.display}} >
-                        <TextField
-                        id="filled-select-currency"
-                        select
-                        label="Select Certificate"
-                        value={this.state.addCer}
-                        onChange={this.handleChange("addCer")}
-                        color="primary"
-                        variant="outlined"
-                        style={{
-                          width: "10vw",
-                          height: "10vh",
-                    
-
-                       
-                        }}
-                      >
                         
-                       
-                      </TextField>
-                      <Button
-                      color="primary"
-                      variant="contained"
-                      style={{height:"7vh",position:"relative",top:"40%",left:"10%"}}
-                      onClick={this.handleAdd}
-                      >
-                        Add +
-                      </Button>
-                        </div>
                         {this.state.approved===true?(<VerifyBadge />):(                       
                            <Button 
-                      color="primary"
+                      
                       variant="contained"
                       style={{
                         position:"relative",
                         top:"220%",
                         left:"35%"
                       }}
-                      onClick={this.handleSubmit}>
-                        Approve
+              >
+                        Pending
                         </Button>
                         )
                         }
