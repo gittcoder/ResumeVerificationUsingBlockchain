@@ -17,7 +17,9 @@ const postHeader = {
   method: "POST",
   headers: {
     ...getHeader,
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
+
   }
 };
 

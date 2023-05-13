@@ -125,6 +125,7 @@ class Dashboard extends Component {
       headers: {
         ...getHeader,
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
       },
     };
     console.log(localStorage.getItem("user"));

@@ -136,7 +136,8 @@ const getHeader = {
     method: "POST",
     headers: {
       ...getHeader,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
     }
   };
     console.log(localStorage.getItem("user"));
