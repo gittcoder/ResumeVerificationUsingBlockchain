@@ -57,7 +57,7 @@ class OrgHome extends Component
   }
 
 
-  handleSubmit = event=(index) => {
+  handleSubmit = (event,index) => {
     event.preventDefault();
     if (this.state.currentState === "validate") {
       return;
