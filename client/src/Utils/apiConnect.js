@@ -23,7 +23,7 @@ const postHeader = {
 
 let host = "";
 
-host = "http://localhost:3000";
+host = "https://master.d1z312s03luts7.amplifyapp.com";
 
 export const getCertificate = certificateId =>
   fetch(`${host}/certificate/data/${certificateId}`, getHeader)

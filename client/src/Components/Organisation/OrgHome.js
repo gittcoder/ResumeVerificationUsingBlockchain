@@ -140,7 +140,7 @@ const getHeader = {
     }
   };
     console.log(localStorage.getItem("user"));
-    fetch(`http://localhost:3000/ViewRequests`, {
+    fetch(`https://master.d1z312s03luts7.amplifyapp.com/ViewRequests`, {
       ...postHeader,
       body: JSON.stringify({
         email:localStorage.getItem("user"),
