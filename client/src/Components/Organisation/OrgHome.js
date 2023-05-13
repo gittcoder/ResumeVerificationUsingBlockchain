@@ -57,7 +57,7 @@ class OrgHome extends Component
   }
 
 
-  handleSubmit = event => {
+  handleSubmit = event=(index) => {
     event.preventDefault();
     if (this.state.currentState === "validate") {
       return;
@@ -76,6 +76,7 @@ class OrgHome extends Component
       
       
     )
+    console.log(shared);
     
     // let candidateName = `${firstname} ${Message}`;
     // let assignDate = new Date(assignedOn).getTime();
@@ -274,6 +275,7 @@ const getHeader = {
               style={{position:"relative",top:"10%",left:"5%",marginBottom:"30px"}}
               className={"b"+index}
               onClick={()=>{
+                this.handleSubmit(index)
                 if(this.state.requests[index].Status==="approved")
                 {
                   this.setState({approved:true,display:"0"})

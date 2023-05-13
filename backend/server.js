@@ -169,22 +169,7 @@ app.post("/certificate/generate", (req, res) => {
 
   certificate
     .save()
-    .then(obj => {
-      const dbRes = obj.toJSON();
-      obj
-        .appendBlockchain()
-        .then(data => {
-          const { transactionHash, blockHash } = data.receipt;
-          res.status(201).send({
-            receipt: {
-              transactionHash,
-              blockHash
-            },
-            data: dbRes
-          });
-        })
-        .catch(err => {console.log(err);res.status(500).send(err)});
-    })
+    
     .catch(err => {
       console.log(err);
       res.status(400).send();

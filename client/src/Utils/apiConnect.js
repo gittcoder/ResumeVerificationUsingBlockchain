@@ -23,7 +23,7 @@ const postHeader = {
 
 let host = "";
 
-if (process.env.NODE_ENV !== "production") host = "http://localhost:3000";
+host = "http://localhost:3000";
 
 export const getCertificate = certificateId =>
   fetch(`${host}/certificate/data/${certificateId}`, getHeader)
