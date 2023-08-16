@@ -41,6 +41,11 @@ app.get("/certificate/data/:id", (req, res) => {
     .catch(err => res.status(400).send({ err }));
 });
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/index.html'));
+});
+
+
 app.get("/certificate/verify/:id", (req, res) => {
   let certificateId = req.params.id;
   console.log(certificateId);

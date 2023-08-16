@@ -196,7 +196,7 @@ class GenerateForm extends React.Component {
               </div>
               <div className="input-box">
                 <span className="details">Password</span>
-                <input type="text" placeholder="Enter your password" required
+                <input type="password" placeholder="Enter your password" required
                 id="pwd"
                       className={classes.textField}
                       value={pass}
@@ -205,15 +205,15 @@ class GenerateForm extends React.Component {
               </div>
               <div className="input-box">
                 <span className="details">Confirm Password</span>
-                <input type="text" placeholder="Confirm your password" required />
+                <input type="password" placeholder="Confirm your password" required />
               </div>
             </div>
             
             <div className={" gender-details"}  id="gender" value={gender}
             onChange={this.handleChange("gender")}>
-            <input type="radio" name="gender" id="dot-1" />
-              <input type="radio" name="gender" id="dot-2" />
-              <input type="radio" name="gender" id="dot-3" />
+            <input type="radio" name="gender" id="dot-1" value="male" />
+              <input type="radio" name="gender" id="dot-2" value="female"/>
+              <input type="radio" name="gender" id="dot-3" value="na" />
               <span className="gender-title">Gender</span>
               <div className="category">
                 <label for="dot-1">

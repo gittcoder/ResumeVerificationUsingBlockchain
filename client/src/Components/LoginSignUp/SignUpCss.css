@@ -11,7 +11,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins',sans-serif;
-  /*linear-gradient(135deg, #71b7e6, #9b59b6); */
+  
 }
 .sign-up-container{
   max-width: 700px;
@@ -35,7 +35,7 @@
   width: 30px;
   border-radius: 5px;
   background: linear-gradient(180deg, #71b7e6, #2096F3) 
-  /*linear-gradient(135deg, #71b7e6, #9b59b6); */
+  
 }
 .sign-up-content .form .user-details{
   display: flex;
@@ -67,19 +67,13 @@
 .user-details .input-box input:valid{
   border-color: #9b59b6;
 }
-/* .gender-details{
- width:80%;
-} */
+
  .form .gender-details .gender-title{
   font-size: 20px;
   font-weight: 500;
   
  }
 
- /* .dot-1 .category {
-  margin:20px;
-}
-  */
  .form .category{
    display: flex;
    width: 80%;
@@ -129,12 +123,12 @@
    cursor: pointer;
    transition: all 0.3s ease;
    background:linear-gradient(135deg, #71b7e6, #2096F3) ;
-   /*linear-gradient(135deg, #71b7e6, #9b59b6); */
+
  }
  .form .sign-up-button input:hover{
    transform: scale(0.99); 
   background: linear-gradient(180deg, #71b7e6, #2096F3) ;
-  /*linear-gradient(-135deg, #71b7e6, #9b59b6); */
+
   }
   @media (max-width: 959.95px){
     .gender-details {
