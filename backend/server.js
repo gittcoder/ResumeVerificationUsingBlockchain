@@ -31,6 +31,11 @@ app.use((req, res, next) => {
 // CORS
 if (process.env.NODE_ENV !== "production") app.use(require("cors")());
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/index.html'));
+});
+
+
 app.get("/certificate/data/:id", (req, res) => {
   let certificateId = req.params.id;
   console.log(certificateId)
