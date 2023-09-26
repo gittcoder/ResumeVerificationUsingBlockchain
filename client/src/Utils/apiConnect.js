@@ -25,7 +25,7 @@ const postHeader = {
 
 let host = "";
 
-host = "https://master.d1z312s03luts7.amplifyapp.com";
+host = "https://6512e81569c2460c636a9e49--lucky-zuccutto-2af8e0.netlify.app/";
 
 export const getCertificate = certificateId =>
   fetch(`${host}/certificate/data/${certificateId}`, getHeader)
