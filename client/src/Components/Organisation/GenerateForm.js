@@ -9,6 +9,7 @@ import SubmitAnimation from "../Animation/SubmitAnimation";
 import { generateCertificate } from "../../Utils/apiConnect";
 import { Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
+import history from "../../Utils/history";
 
 
 const styles = theme => ({
@@ -137,6 +138,8 @@ class GenerateForm extends React.Component {
           });
       })
       .catch(err => console.log(err));
+
+      history.push("/OrgHome");
   };
 
   render() {

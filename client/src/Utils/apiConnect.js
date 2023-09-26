@@ -17,13 +17,15 @@ const postHeader = {
   method: "POST",
   headers: {
     ...getHeader,
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
+
   }
 };
 
 let host = "";
 
-if (process.env.NODE_ENV !== "production") host = "http://localhost:3000";
+host = "https://master.d1z312s03luts7.amplifyapp.com";
 
 export const getCertificate = certificateId =>
   fetch(`${host}/certificate/data/${certificateId}`, getHeader)

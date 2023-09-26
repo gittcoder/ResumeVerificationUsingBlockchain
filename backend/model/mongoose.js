@@ -18,7 +18,7 @@ dbuser = process.env.DB_USER;
 dbpassword = process.env.DB_PASSWORD;
 dbname = process.env.DB_NAME;
 
-const mongoURL = `mongodb://${dbuser}:${dbpassword}@${dbhost}:${dbport}/${dbname}`;
+const mongoURL = `mongodb+srv://E2voLytrG9zbyij5:Xs4eBRD1wUVeZvvs@cluster0.9h171cg.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.Promise = global.Promise;
 

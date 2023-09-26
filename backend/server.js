@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const log = require("./utils/log");
 const path = require("path");
+const cors = require('cors')
 
 if (process.env.NODE_ENV === undefined) process.env.NODE_ENV = "development";
 const Certificates = require("./model/Certificates");
@@ -12,6 +13,7 @@ const Login = require("./model/Login");
 const OrgReg = require("./model/OrgReg");
 
 // parse application/x-www-form-urlencoded
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
@@ -174,22 +176,7 @@ app.post("/certificate/generate", (req, res) => {
 
   certificate
     .save()
-    .then(obj => {
-      const dbRes = obj.toJSON();
-      obj
-        .appendBlockchain()
-        .then(data => {
-          const { transactionHash, blockHash } = data.receipt;
-          res.status(201).send({
-            receipt: {
-              transactionHash,
-              blockHash
-            },
-            data: dbRes
-          });
-        })
-        .catch(err => {console.log(err);res.status(500).send(err)});
-    })
+    
     .catch(err => {
       console.log(err);
       res.status(400).send();
