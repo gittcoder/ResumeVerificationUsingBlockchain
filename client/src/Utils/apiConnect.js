@@ -16,7 +16,7 @@ const getHeader = {
 const postHeader = {
   method: "POST",
   headers: {
-    ...getHeader,
+  
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*"
 
@@ -25,7 +25,9 @@ const postHeader = {
 
 let host = "";
 
-host = "https://6512e81569c2460c636a9e49--lucky-zuccutto-2af8e0.netlify.app/";
+// host = "https://6512e81569c2460c636a9e49--lucky-zuccutto-2af8e0.netlify.app";
+// host="http://localhost:3000";
+host="https://securifybackend.onrender.com";
 
 export const getCertificate = certificateId =>
   fetch(`${host}/certificate/data/${certificateId}`, getHeader)
