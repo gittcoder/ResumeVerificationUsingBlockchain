@@ -141,7 +141,7 @@ const getHeader = {
     }
   };
     console.log(localStorage.getItem("user"));
-    fetch(`https://master.d1z312s03luts7.amplifyapp.com/ViewRequests`, {
+    fetch(`https://securifybackend.onrender.com/ViewRequests`, {
       ...postHeader,
       body: JSON.stringify({
         email:localStorage.getItem("user"),

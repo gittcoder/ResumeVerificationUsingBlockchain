@@ -129,7 +129,7 @@ class Dashboard extends Component {
       },
     };
     console.log(localStorage.getItem("user"));
-    fetch(`https://master.d1z312s03luts7.amplifyapp.com/certificateList`, {
+    fetch(`https://securifybackend.onrender.com/certificateList`, {
       ...postHeader,
       body: JSON.stringify({
         email: localStorage.getItem("user"),
