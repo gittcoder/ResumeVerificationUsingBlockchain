@@ -5,20 +5,19 @@ const log = require("../utils/log");
 require("dotenv").config({ path: path.resolve(process.cwd(), "../" + ".env") });
 
 let dbuser, dbhost, dbpassword, dbname, dbport;
+let mongoURL=` `;
 
 if (process.env.NODE_ENV === "production") {
-  dbhost = process.env.DB_PRODUCTION_HOST;
-  dbport = process.env.DB_PRODUCTION_PORT;
+  mongoURL="mongodb+srv://user:password@cluster0.9h171cg.mongodb.net/?retryWrites=true&w=majority"
 } else {
-  dbhost = process.env.DB_HOST;
-  dbport = process.env.DB_PORT;
+  mongoURL="mongodb://root:root@:127.0.0.1:27017/certification"
 }
 
 dbuser = process.env.DB_USER;
 dbpassword = process.env.DB_PASSWORD;
 dbname = process.env.DB_NAME;
 
-const mongoURL = `mongodb+srv://E2voLytrG9zbyij5:Xs4eBRD1wUVeZvvs@cluster0.9h171cg.mongodb.net/?retryWrites=true&w=majority`;
+// const mongoURL = `mongodb+srv://E2voLytrG9zbyij5:Xs4eBRD1wUVeZvvs@cluster0.9h171cg.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.Promise = global.Promise;
 
