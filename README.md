@@ -22,6 +22,8 @@ Distributed Ledger platform for issuing verified certifications ,LOR's very hand
 
 - Setup Local Blockchain :
     - Run the following command to start a local blockchain
+    
+        `cd backend `
 
         `npm run ganache`
 
@@ -33,6 +35,8 @@ Distributed Ledger platform for issuing verified certifications ,LOR's very hand
 
 - Setup Backend / API
     - Start express API
+
+        `cd backend `
 
         `npm start`
     
