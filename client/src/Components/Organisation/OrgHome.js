@@ -57,45 +57,27 @@ class OrgHome extends Component
   }
 
 
-  handleSubmit = (event,index) => {
-    event.preventDefault();
+  handleSubmit = (index) => {
     if (this.state.currentState === "validate") {
       return;
     }
     this.setState({ currentState: "load" });
-   let shared=""
-   this.state.added.map((item)=>
+   let shared=this.state.requests[index]["Shared"];
+   shared=shared.split(",");
+   let c=[];
+   let temp=[];
+
+   for(let i=0;i<shared.length-1;i++)
    {
-    shared+=item._id+",";
-   })
-    console.log(localStorage.getItem("orgname"))
-    OrgViewRequests(localStorage.getItem("user"),
-      localStorage.getItem("pwd"),
-      shared,
-      this.state.requests[this.state.reqid]["_id"]
-      
-      
-    )
-    console.log(shared);
-    
-    // let candidateName = `${firstname} ${Message}`;
-    // let assignDate = new Date(assignedOn).getTime();
-    // generateCertificate(
-    //   candidateName,
-    //   coursename,
-    //   organization,
-    //   assignDate,
-    //   parseInt(duration),
-    //   emailId
-    // )
-      // .then(data => {
-      //   if (data.data !== undefined)
-      //     this.setState({
-      //       currentState: "validate",
-      //       User: data.data.User
-      //     });
-      // })
-      // .catch(err => console.log(err));
+      temp=shared[i].split(":");
+      c.push({_id:temp[0],name:temp[1]})
+   }
+
+   this.setState({
+    shared:c
+   });
+
+    // console.log(this.state.requests[2]["Shared"]);
   };
 
   handleRemove = x => event =>
@@ -153,6 +135,7 @@ const getHeader = {
           await res.json().then(
             (body)=>{
               let c=[]
+              let a=[]
               let req = JSON.parse(body)
           
               req.forEach((entries)=>
@@ -162,7 +145,7 @@ const getHeader = {
               })
               this.setState({requests:c})
               
-              console.log(this.state.requests[this.state.reqid].OrgName);
+              console.log(this.state.requests);
              }
           )
           
@@ -268,7 +251,7 @@ const getHeader = {
             <Card className={"c"+index} key={index} 
             sx={{boxShadow: "10px 10px 20px rgb(30,30,30)"}}
             style={{width:"15vw",height:"20vh",borderRadius:"20px",position:"relative",left:"2%",marginTop:"20px",marginBottom:"20px"}}> 
-              <Typography style={{fontSize:"15px"}}>Organization : {item.OrgName}</Typography>
+              <Typography style={{fontSize:"15px"}}>Request To : {item.ReqTo}</Typography>
   
               
           
@@ -296,14 +279,14 @@ const getHeader = {
           </div>
               )}
               
-        <div style={{position:"fixed",top:"15%",left:"15%"}}>
+        <div style={{position:"fixed",top:"15%",left:"35%",display:"inline-block"}}>
         
         <Fade in={this.state.nav}>
                     <Grid
                         className="entry"
                         container
                         sx={{
-                        width: "600vw",
+                        width: "1000vh",
                           height:"500vh",
                        
                         color: "black",
@@ -312,12 +295,7 @@ const getHeader = {
                     >
                         <Card
                         sx={{
-                            width: {
-                            xs: "70%",
-                            sm: "70%",
-                            md: "80%",
-                            lg: "60%",
-                            },
+                           width:"1000vh",
                            height:"500vh",
                             borderRadius: "10rem",
                             boxShadow: "0 10px 20px rgb(30,30,30)",
@@ -348,6 +326,7 @@ const getHeader = {
                         <p style={{fontSize:"15px",justifyContent:"end"}}>Message : </p>
                        
                         <div ><p style={{margin:"20px 20px 20px",border:"2px solid blue",width:"80%",marginBottom:"3vh"}}>{this.state.message}</p></div>
+                        {/* <p>Yooooo!!!!</p> */}
                         
                         <div className="added Certificates" style={{position:"relative",top:"10%",left:"10%",marginBottom:"4vh"}}>
                           {
@@ -356,11 +335,12 @@ const getHeader = {
                               <div>
                                 <Grid  key={index} style={{position:"relative",top:"10%",left:"10%"}} container >
                                 <Grid item>
-                                    <Typography variant="h5" style={{marginRight:"3vw",marginBottom:"2vh"}}>{item.title}</Typography>
+                                    <Typography variant="h5" style={{marginRight:"3vw",marginBottom:"2vh"}}>{item.name}</Typography>
                                 </Grid>
                                 <Grid item>
                                 <Button  onClick={()=>{history.push("/display/certificate/"+item._id)}} variant = "contained">View</Button>
                                 </Grid>
+                                
                             </Grid>
                               
                               </div>

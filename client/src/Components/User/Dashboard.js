@@ -146,7 +146,8 @@ class Dashboard extends Component {
               c.push(entries["obj"]);
             });
             this.setState({ certificates: c });
-            console.log(this.state.certificates);
+            // console.log(this.state.certificates);
+            console.log(body["1"]);
             let req = JSON.parse(body["1"]);
             c = [];
             req.forEach((entries) => {
